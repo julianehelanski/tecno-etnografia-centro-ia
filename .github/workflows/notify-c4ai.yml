@@ -1,0 +1,36 @@
+# Avisa o repo do site (tecno-etnografia-tese-site) sempre que um capÃ­tulo
+# da tese muda, para que ele regenere a anÃ¡lise de redes automaticamente.
+#
+# Onde colocar: este arquivo vai NO REPO DA TESE
+#   julianehelanski/tecno-etnografia-centro-ia
+#   em .github/workflows/notify-c4ai.yml
+#
+# PrÃ©-requisito: criar o secret C4AI_DISPATCH_PAT (instruÃ§Ãµes no chat).
+
+name: Notifica tecno-etnografia-tese-site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ex_cap*.tex"
+      - "**/ex_cap*.tex"
+  # permite disparar manualmente em Actions -> Run workflow
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar repository_dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.C4AI_DISPATCH_PAT }}
+          repository: julianehelanski/tecno-etnografia-tese-site
+          event-type: thesis-updated
+          client-payload: |-
+            {
+              "sha": "${{ github.sha }}",
+              "ref": "${{ github.ref }}",
+              "actor": "${{ github.actor }}"
+            }
