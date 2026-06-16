@@ -1,0 +1,546 @@
+% Apêndice reestruturado: Fazer-com IA
+% ---------------------------------------------------------------
+% NOTA: os ambientes faladaP e faladaC devem ser definidos no preâmbulo
+% da tese. Definições recomendadas (cores da paleta da tese):
+%
+% \definecolor{corP}{HTML}{534AB7}   % roxo (pesquisadora)
+% \definecolor{corC}{HTML}{0F6E56}   % verde-escuro (Claude)
+%
+% \newenvironment{faladaP}{%
+%   \par\medskip\noindent
+%   \setlength{\fboxsep}{6pt}\setlength{\fboxrule}{0.55pt}%
+%   \fcolorbox{corP}{corP!5}{%
+%     \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}%
+%       \ttfamily\footnotesize\setstretch{1}%
+% }{%
+%     \end{minipage}}\par\smallskip}
+%
+% \newenvironment{faladaC}{%
+%   \par\smallskip\noindent
+%   \setlength{\fboxsep}{6pt}\setlength{\fboxrule}{0.55pt}%
+%   \fcolorbox{corC}{corC!5}{%
+%     \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}%
+%       \ttfamily\footnotesize\setstretch{1}%
+% }{%
+%     \end{minipage}}\par\medskip}
+% ---------------------------------------------------------------
+
+\chapter{Fazer-com IA}
+\label{apendice:colaboracao-ia}
+
+Este apêndice documenta, a partir dos meus próprios registros de trabalho, o processo pelo qual escrevi esta tese em composição com um modelo de linguagem. Ao longo de mais de um ano de trabalho, sentei diante do mesmo notebook, abri sessões na interface web do Claude (Anthropic), colei rascunhos, fiz perguntas, recebi respostas, rejeitei formulações, pedi refazimentos, copiei código para o Spyder, executei, voltei a pedir ajustes. Esse vai-e-vem produziu um objeto que não reconheço como meu no sentido convencional de autoria, e tampouco posso descrever como produzido pelo modelo. Haraway chama esse tipo de fazer de simpoiese: sistemas coletivamente produtores, dependentes de contexto, em que nada se faz a si mesmo e tudo é feito em conjunto, em configurações parciais e inacabadas \parencite{Haraway2016Staying}. O que os registros abaixo tornam visível é a \textit{tecnoetnografia} como prática, isto é, o movimento recursivo pelo qual o instrumento da análise coincide parcialmente com o objeto analisado, movimento que desenvolvo conceitualmente na Subseção~\ref{subsec:tecnoetnografia} do Capítulo~\ref{capitulo4}.
+
+Haraway recorre ao jogo de cama-de-gato (\textit{cat's cradle}) para figurar a simpoiese no domínio do conhecimento: dois pares de mãos que se alternam entre ativo e passivo, cada um oferecendo ao outro o entrelaçamento produzido pela operação anterior para que o seguinte o trabalhe, tornando-se ativo de novo quando o outro apresenta o novo padrão \parencite{Haraway2016Staying}. A consequência e o significado do que foi feito, pensado ou escrito pertencem ao padrão, e o padrão está em nossas mãos. É esse ritmo de receber e oferecer, de segurar e deixar ir, que eu tento tornar visível nas páginas que seguem, na escala da sessão de trabalho.
+
+Dividi o apêndice em três partes. A Parte~I reúne trechos de composição durante a elaboração do Capítulo~\ref{capitulo1}, entre janeiro e fevereiro de 2026, quando eu trabalhava com o Claude Opus~4.5; os três trechos cobrem argumentação conceitual, construção de diagramas e revisão estilística. A Parte~II reúne trechos da composição durante o Capítulo~\ref{capitulo4}, em março de 2026, quando passei a trabalhar com o Claude Sonnet~4.6; os quatro trechos cobrem a geração dos espectrogramas, a emergência de formulações analíticas no diálogo, a grafia do funcionamento estocástico e os antiprogramas que encontrei ao escrever um ensaio para o concurso Fangtang. A Parte~III documenta a colaboração na análise bibliométrica do Capítulo~\ref{capitulo2}.
+
+%% ====================================================================
+%% PARTE I
+%% ====================================================================
+
+\part*{Parte I: A composição no Capítulo~\ref{capitulo1} (jan.--fev. 2026)}
+\addcontentsline{toc}{section}{Parte I: A composição no Capítulo 1}
+
+Os registros que abro aqui vêm de conversas que tive com o Claude (Anthropic, modelo Claude Opus~4.5) entre janeiro e fevereiro de 2026, enquanto eu compunha o Capítulo~\ref{capitulo1}.\footnote{Conduzi as conversas na interface web claude.ai. Extraí as transcrições diretamente da plataforma e editei apenas para adequar ao formato \LaTeX{}, retirar metadados da interface e inserir minhas notas contextuais. Não alterei o conteúdo substantivo das trocas.}
+
+%% ====================================================================
+%% TRECHO A
+%% ====================================================================
+
+\section*{Trecho A: Revisão das seções sobre alienação técnica e existências parciais}
+
+\subsection*{Contexto}
+
+No dia 3 de fevereiro de 2026, abri a conversa com o diálogo entre Richard Powers e Bruno Latour \parencite{Latour2008Powers} anexado como PDF, junto ao rascunho em andamento das seções ``Alienação técnica e os limites do humanismo'' e ``Os não humanos desta tese.''\footnote{Sessão de 3 de fevereiro de 2026. Anexei o \textcite{Latour2008Powers} à conversa.} Depois de algumas trocas sobre a epígrafe e o argumento central, enviei ao modelo a mensagem que reproduzo abaixo.
+
+\subsection*{A.1: Como eu formulei o problema}
+
+\begin{faladaP}
+P: Tem uma outra questão mais profunda que também me incomoda nesse argumento sobre um certo purismo intelectual herança de uma academia tradicional ou algo assim e que é mais problemático ao meu ver do que tratar a IA como mera ferramenta, veja o artigo do Latour em anexo de onde tiro a epígrafe do início da seção: Simondon argumenta que essa assimetria não é acidental, mas expressão de um problema mais profundo: a alienação técnica. Para Simondon, a alienação não reside na máquina em si, mas no não-conhecimento de sua natureza {[}segue citação do rascunho em andamento{]} [\ldots] São, portanto, objetos técnicos saturados de significação e, no entanto, são comumente tratados como meros instrumentos, reduzidos à pergunta ``a máquina fez ou você fez?'', como se a mediação técnica fosse transparente ou inexistente.
+\end{faladaP}
+
+\noindent\emph{Naquele dia eu enviei o texto do rascunho e uma orientação interpretativa ao mesmo tempo. O modelo não recebeu uma pergunta fechada, e sim uma direção de pensamento.}
+
+\bigskip
+
+\subsection*{A.2: A articulação que o assistente propôs}
+
+\begin{faladaC}
+C: [\ldots] Esse é um ponto muito forte e me parece que você está articulando algo que vai além da questão metodológica sobre ``usar ou não usar IA'' --- está tocando no cerne do que Simondon diagnostica como alienação técnica e que o diálogo Powers-Latour dramatiza de forma tão vívida.
+
+O texto que você anexou é extraordinário justamente porque performa o argumento: dois ``quase-máquinas'' trocando mensagens por e-mail, mediados por modems, protocolos, convenções estilísticas, e ainda assim produzindo algo vivo. Latour insiste repetidamente que a mediação eletrônica não acrescenta nem subtrai muita mediação em relação ao que já existe em qualquer interação ``natural'' [\ldots] O ponto é que \textbf{a pergunta ``a máquina fez ou você fez?'' já pressupõe exatamente a partição que tanto Latour quanto Simondon rejeitam}.
+
+[\ldots] O que me parece mais potente no seu argumento é a passagem de Simondon: a alienação não está na máquina, mas no \textbf{não-conhecimento de sua natureza}. Isso é exatamente o que acontece quando a academia trata a IA generativa como ``mera ferramenta'': está operando a mesma redução que Simondon critica, despojando o objeto técnico de toda a rede de decisões humanas, vieses culturais, escolhas normativas que o constituem. É, paradoxalmente, um gesto anti-intelectual disfarçado de purismo intelectual. [\ldots]
+\end{faladaC}
+
+\noindent\emph{Ao ler essa resposta, percebi duas coisas ao mesmo tempo. O modelo havia identificado uma convergência entre Simondon e Latour que eu tinha intuído sem articular (a partição como pressuposto), e havia proposto uma formulação, ``gesto anti-intelectual disfarçado de purismo intelectual'', que sintetizava o argumento que eu vinha rodeando. Também percebi o começo do Claude ``O texto que você anexou é extraordinário'', que é exatamente a condescendência que vou documentar no Trecho~C desta mesma parte. O mesmo apêndice que registra o diagnóstico da condescendência a exibe em operação, e eu escolhi deixar os dois ali, sem retocar.}
+
+\bigskip
+
+\subsection*{A.3: O redirecionamento teórico que eu propus}
+
+\begin{faladaP}
+P: Tinha em mente justamente tudo isso que você falou, incorpore nas seções a seguir e mais coisa, na verdade não existe o humano e o não humano, mas existências parciais (reformule esse argumento também).
+\end{faladaP}
+
+\noindent\emph{Esse foi o momento de decisão teórica da interação. Até ali, o vocabulário ``humano / não humano'' ainda preservava dois polos; o que eu queria era dissolver a oposição em existências parciais. O modelo não havia proposto esse deslocamento. Minha instrução foi ao mesmo tempo vaga (``mais coisa'') e teoricamente precisa (``existências parciais''), e caberia ao Claude traduzir a intuição em texto acadêmico sem trair o conceito.}
+
+\bigskip
+
+\subsection*{A.4: A produção textual conjunta (excerto)}
+
+A partir daquela instrução, o modelo gerou uma versão revisada das duas seções. O trecho abaixo articula Strathern e Latour em torno da noção de existências parciais:
+
+\begin{faladaC}
+C [texto gerado para as seções]: Não há, portanto, entidades que sejam plenamente humanas de um lado e plenamente maquínicas do outro, mas existências parciais que se compõem mutuamente. A noção de ``conexão parcial,'' formulada por Strathern a partir de sua leitura crítica da teoria ator-rede, oferece aqui uma precisão decisiva: as entidades não são nem completamente conectadas (o que as tornaria a mesma coisa) nem completamente separadas (o que tornaria impossível qualquer relação entre elas), mas parcialmente conectadas --- análogas sem serem homólogas. A pesquisadora que escreve com assistência de IA não é ``humano + máquina,'' como se duas entidades discretas se somassem; é uma composição parcial, na qual nem a pesquisadora existe independentemente das mediações técnicas que a atravessam, nem o modelo de linguagem existe independentemente das decisões humanas que o constituíram. [\ldots]
+\end{faladaC}
+
+\noindent\emph{A ``existência parcial'' que eu havia mencionado em uma frase foi traduzida pelo modelo em formulação acadêmica que mobiliza Strathern (conexões parciais, análogas sem serem homólogas) e Latour (quase-máquinas). Eu conhecia essas referências e as tinha na cabeça quando formulei a instrução; o modelo as articulou em prosa. O resultado é composição: eu não teria produzido essa formulação exata sem a interação, e o modelo não poderia tê-la gerado sem a direção teórica que eu fornecera.}
+
+\bigskip
+
+\subsection*{A.5: A renomeação da seção}
+
+O modelo propôs, junto com a revisão do texto, renomear a seção ``Os não humanos desta tese'' para ``Existências parciais desta tese'':
+
+\begin{faladaC}
+C: Na seção ``Os não humanos'', renomeei para ``Existências parciais desta tese'' --- título que performa o argumento teórico em vez de contradizê-lo.
+\end{faladaC}
+
+\noindent\emph{Aceitei a renomeação porque o título anterior contradizia o argumento que a seção apresentava. Se a tese argumenta que a distinção humano/não humano é o que precisa ser explicado, um título que a reafirma opera contra o próprio texto que segue.}
+
+
+%% ====================================================================
+%% TRECHO B
+%% ====================================================================
+
+\section*{Trecho B: A construção iterativa dos diagramas}
+
+\subsection*{Contexto}
+
+O que documento aqui é um segundo tipo de colaboração, com ritmo distinto do Trecho~A. No trabalho de diagramação eu não forneci especificações gráficas ao modelo, apenas instruções conceituais (``capture os movimentos de translação'', ``faça um diagrama de triangulação metodológica''), e cabia a ele traduzir essas instruções em código Mermaid. O resultado precisou de negociação iterativa: rejeitei versões sucessivas, redirecionei, e em certo momento mobilizei o diagnóstico de outra IA para pressionar o Claude a refazer o diagrama.\footnote{Sessão principal em 31 de janeiro de 2026. Sessão complementar em 1 de fevereiro de 2026.}
+
+Os diagramas funcionaram como inscrições no sentido latouriano: dispositivos materiais que tornam visíveis relações que, de outro modo, ficariam implícitas \parencite[pp.~81--82]{Latour2017Esperanca}. Vale situar esse trabalho em uma genealogia mais ampla. Em 1992, Latour, Mauguin e Teil propuseram os Gráficos Sócio-Técnicos (STG) como instrumento visual para mapear trajetórias de inovação e controvérsias científicas, implementando-os em Hypercard \parencite{LatourMauguinTeil1992}. Três décadas depois, o processo que registro aqui realiza algo análogo àquela proposta, com deslocamentos reveladores. Onde Latour e colaboradores codificavam narrativas de terceiros dentro de um software pré-estruturado, eu traduzi meu próprio material etnográfico em inscrições visuais por meio de um assistente de inteligência artificial.
+
+
+\subsection*{B.1: A instrução inicial e o diagnóstico externo}
+
+Submeti o diagrama ao recurso de inteligência artificial do próprio editor Mermaid e trouxe o diagnóstico de volta à conversa com o Claude:
+
+\begin{faladaP}
+P: Agora, o Mermaid disse isso: ``This dissertation map is ambitious and intellectually rich, but the flow from data collection through to insights needs tightening. Let's clarify how fieldwork, interviews, and theory connect to your core findings.'' O que você acha?
+\end{faladaP}
+
+\begin{faladaC}
+C: Concordo com o diagnóstico do Mermaid. O problema principal é que as conexões entre coleta de dados, triangulação e achados ainda estão dispersas e redundantes. [\ldots] A teoria deveria conectar à análise (como lente interpretativa), não diretamente aos achados. Quer que eu refaça com esse fluxo mais linear e limpo?
+\end{faladaC}
+
+\noindent\emph{Mobilizei uma segunda IA como aliada argumentativa contra a primeira: transladei o diagnóstico de um actante (Mermaid) para pressionar outro (Claude) a melhorar o resultado.}
+
+\bigskip
+
+\subsection*{B.2: As rejeições sucessivas e a negociação visual}
+
+\begin{faladaP}
+P: Ainda não estou gostando, essas caixas internas soltas (como nas lições) parecem flutuando sem conexão.
+\end{faladaP}
+
+\begin{faladaC}
+C: Entendi --- as caixas internas parecem desconectadas porque não têm setas entre elas. Posso resolver de duas formas: (1) adicionar setas entre os itens dentro de cada subgrupo, ou (2) remover os subgrupos internos e deixar só os nós soltos dentro do grupo pai. Qual abordagem você prefere?
+\end{faladaC}
+
+\begin{faladaP}
+P: Remova os subgrupos internos.
+\end{faladaP}
+
+O modelo executou, e cortou texto em excesso:
+
+\begin{faladaP}
+P: Você cortou bastante texto, por quê?
+\end{faladaP}
+
+\begin{faladaC}
+C: Você tem razão --- cortei demais. Simplifiquei excessivamente os textos dentro dos nós para tentar deixar o fluxo mais limpo, mas perdi informação importante que estava no original.
+\end{faladaC}
+
+\begin{faladaP}
+P: Restaure tudo.
+\end{faladaP}
+
+\noindent\emph{O ritmo é o que me parece descritivamente importante: o modelo propõe, eu rejeito e redireciono, o modelo executa e introduz um efeito colateral (cortar texto), eu detecto e corrijo. Isso é negociação iterativa, em que mantive o controle sobre o resultado sem controlar cada passo.}
+
+\bigskip
+
+\subsection*{B.3: A mobilização de uma referência estética}
+
+\begin{faladaP}
+P: Claude, compara o diagrama com esse outro (cores, formato, etc.).
+\end{faladaP}
+
+\begin{faladaC}
+C: Analisando os dois diagramas, vejo diferenças importantes. Cores: seu diagrama (Translação IBM) usa paleta mais sofisticada e consistente --- tons pastéis suaves com bordas coloridas que combinam, e as cores têm propósito semântico claro. Meu diagrama: cores mais saturadas e menos harmoniosas. Formato: seu diagrama tem caixas mais compactas e hierarquia visual clara entre título e descrição. Quer que eu refaça o diagrama da tese seguindo esse estilo?
+\end{faladaC}
+
+\begin{faladaP}
+P: Sim, faça isso.
+\end{faladaP}
+
+O modelo então produziu uma versão que adotou a paleta pastel, conexões diferenciadas e hierarquia visual com bordas de espessura variável:
+
+\begin{faladaP}
+P: Agora, sim ficou bom!
+\end{faladaP}
+
+\noindent\emph{O impasse se resolveu pela oferta de um exemplo concreto como modelo, e não por instruções descritivas que eu pudesse listar. Nesse trecho atuei como curadora visual, e o modelo como executor técnico que leu as diferenças entre dois artefatos e traduziu as qualidades de um para o outro.}
+
+%% ====================================================================
+%% TRECHO C
+%% ====================================================================
+
+\section*{Trecho C: Revisão estilística: cacoetes do assistente que entraram no meu texto}
+
+\subsection*{Contexto}
+
+Em 6 de fevereiro de 2026, depois de muitas rodadas de revisão do Capítulo~\ref{capitulo1}, pedi ao Claude que identificasse e removesse padrões estilísticos do próprio modelo que haviam se infiltrado no meu texto ao longo de meses de trabalho em conjunto.\footnote{Sessão de 6 de fevereiro de 2026, durante a revisão estrutural e teórica do Capítulo~\ref{capitulo1}. Nessa altura eu havia trabalhado com o Claude em pelo menos trinta sessões para compor esse capítulo.}
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\bigskip
+
+\subsection*{C.1: Como eu formulei o diagnóstico}
+
+\begin{faladaP}
+P: Considerando tudo o que você pode fazer (AI SHOULD BE: Critical Interlocutor, Conceptual Co-constructor, Thinking Stress-Tester, Multi-Perspective Simulator, Creative Experimental Partner) eu quero que você insira no meu texto coisas que me irritam em você, não é que você não faz direito, mas que são desnecessárias: usa travessões de forma excessiva e em muitas das vezes desnecessária; é condescendente demais com meus erros e também com os seus; costuma começar uma frase dizendo o que não é para depois dizer o que é (é desnecessário em termos argumentativos, a não ser que se queira demonstrar alguma coisa específica).
+\end{faladaP}
+
+\noindent\emph{O que pedi foi um gesto de autocrítica delegada. Eu sabia, porque havia lido meu próprio texto várias vezes em voz alta, que o modelo havia deixado marcas que não eram minhas. Pedir ao Claude que as identificasse pressupunha que ele era capaz de reconhecer sua própria assinatura, e essa parte funcionou bem. A outra parte, distinguir cacoete de recurso argumentativo legítimo, coube a mim.}
+
+\bigskip
+
+\subsection*{C.2: O levantamento sistemático que o Claude fez}
+
+O modelo rastreou a seção de lições da pesquisa (linhas 304--395 do arquivo) e encontrou três padrões:
+
+\begin{itemize}
+\item \textbf{Travessões excessivos}: 8 ocorrências nas lições, das quais pelo menos 5 classificadas como desnecessárias (substituíveis por vírgula, dois-pontos ou ponto).
+
+\item \textbf{Construções ``não X, mas Y'' desnecessárias}: 12 ocorrências, das quais 7 classificadas como cacoete (o texto dizia o que algo \emph{não} era antes de dizer o que era, sem ganho argumentativo) e 5 mantidas como contraste constitutivo do argumento.
+
+\item \textbf{Hedges condescendentes}: 5 ocorrências de expressões como ``longe de ser limitação,'' ``ainda que pudesse parecer arriscada,'' ``É importante ressaltar que,'' ``embora necessária'', todas protegendo o argumento de objeções que ninguém havia formulado.
+\end{itemize}
+
+\subsection*{C.3: Exemplos das correções que fiz}
+
+\begin{faladaC}
+C [antes]: ``A adoção da Teoria Ator-Rede como referencial teórico e metodológico \emph{não foi decisão tomada previamente, mas} surgiu de maneira gradual à medida que a pesquisa avançava [\ldots]. A ausência de estrutura teórica rígida no início, \emph{ainda que pudesse parecer arriscada}, revelou-se vantajosa [\ldots]''
+\end{faladaC}
+
+\begin{faladaP}
+P [depois]: ``A adoção da Teoria Ator-Rede como referencial teórico e metodológico surgiu de maneira gradual, à medida que a pesquisa avançava [\ldots]. A ausência de estrutura teórica rígida no início revelou-se vantajosa [\ldots]''
+\end{faladaP}
+
+\begin{faladaC}
+C [antes]: ``A `ciência em construção' chegou a mim, portanto, mediada pela narrativa dos próprios pesquisadores, e essa mediação, \emph{longe de ser limitação}, revelou-se analiticamente produtiva.''
+\end{faladaC}
+
+\begin{faladaP}
+P [depois]: ``A `ciência em construção' chegou a mim, portanto, mediada pela narrativa dos próprios pesquisadores, e essa mediação revelou-se analiticamente produtiva.''
+\end{faladaP}
+
+\noindent\emph{Distinguir cacoete de recurso argumentativo legítimo exigiu julgamento caso a caso. Na seção teórica sobre existências parciais, deixei construções como ``a simetria exige reconhecer essa diferença e recusar que dela se extraia uma assimetria explicativa'' porque ali o contraste é constitutivo do argumento latouriano. O critério que fui usando, silenciosamente, foi: a negação prévia acrescenta alguma coisa que a afirmação direta não conteria? Se a resposta fosse negativa, era cacoete, e eu cortava.}
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+
+%% ====================================================================
+%% PARTE II
+%% ====================================================================
+
+\part*{Parte II: A composição no Capítulo~\ref{capitulo4} (mar. 2026)}
+\addcontentsline{toc}{section}{Parte II: A composição no Capítulo 4}
+
+Os registros desta parte vêm de sessões de trabalho com o Claude Sonnet~4.6 que conduzi em março de 2026, enquanto escrevia o Capítulo~\ref{capitulo4}. Troquei de modelo (do Opus~4.5 para o Sonnet~4.6) por conta de um limite de capacidade que a interface oferecia no meu plano de assinatura, e a troca coincidiu com uma mudança de registro no trabalho. Onde a Parte~I documentava argumentação conceitual e construção de diagramas, a Parte~II passa a documentar produção de código, geração de imagens e a emergência de formulações analíticas dentro do diálogo sobre os dados do SPIRA. Foi nessas sessões que a recursividade da tecnoetnografia ficou empiricamente visível para mim: o assistente de inteligência artificial participou da análise de um sistema de inteligência artificial, e o modo como participou, com seus programas e antiprogramas, tornou-se ele próprio objeto da minha análise.
+
+Os quatro trechos que seguem cobrem: a sessão de geração dos espectrogramas (Trecho~D), o vocabulário como política ontológica (Trecho~E), a grafia do funcionamento estocástico (Trecho~F) e os antiprogramas que encontrei ao escrever um ensaio sobre a própria colaboração (Trecho~G).
+
+%% ====================================================================
+%% TRECHO D
+%% ====================================================================
+
+\section*{Trecho D: A geração dos espectrogramas e a emergência de dados analíticos}
+
+\subsection*{Contexto}
+
+Em 12 de março de 2026 abri uma sessão com um objetivo prático: gerar os espectrogramas mel do dataset público do SPIRA para o Capítulo~\ref{capitulo4}. Os parâmetros técnicos, o código Python e o percurso de localização do dataset estão no Apêndice~\ref{apendice:spira-dataset}. Os trechos que recorto abaixo são os momentos em que o diálogo com o Claude produziu deslocamentos no argumento analítico.
+
+
+\subsection*{D.1: O nome do arquivo como des-crição}
+
+\begin{faladaP}
+P: Preciso gerar o espectrograma mel de uma gravação do grupo controle e de uma do grupo paciente do SPIRA, com os parâmetros que os artigos do Marcelo descrevem. O repositório é público mas não sei como navegar nele. Você consegue me ajudar?
+\end{faladaP}
+
+\begin{faladaC}
+C: Localizei o repositório principal em https://github.com/SPIRA-COVID19/SPIRA-ACL2021 e os dados de áudio disponibilizados via Google Drive. Os parâmetros descritos nos artigos são: taxa de amostragem de 16~kHz (sr=16000), 128 coeficientes Mel (n\_mels=128), frequência máxima de 8~kHz (fmax=8000). Posso gerar o código para você.\par\medskip Antes, um detalhe que pode ter interesse para o argumento que você está desenvolvendo: o dataset foi produzido de forma completamente anônima. Os arquivos .wav são identificados apenas por metadados neutros: sexo, faixa etária, saturação de oxigênio, uso de máscara. Mas o nome de um dos arquivos do grupo paciente, PTT-20200511-WA0018.wav, preserva rastros do percurso de coleta: PTT indica gravação por Push-To-Talk, e WA indica WhatsApp. A voz foi enviada por mensagem de voz antes de se tornar dado científico.
+\end{faladaC}
+
+\begin{faladaP}
+P: Isso é exatamente o tipo de coisa que a des-crição de Akrich deveria recuperar. O artigo não diz isso, mas o nome do arquivo diz.
+\end{faladaP}
+
+\noindent\emph{O detalhe sobre o nome do arquivo emergiu do processamento dos metadados pelo modelo, sem que eu tivesse formulado essa pergunta. O Claude funcionou ali como observador inscrito no sentido de \textcite{Latour1986Writing}, e me devolveu uma leitura que eu não havia feito sobre meu próprio material. A conexão com a des-crição de Akrich foi minha.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 12 mar.~2026.}
+
+\subsection*{D.2: A diferença de duração como dado analítico}
+
+\begin{faladaP}
+P: Agora faça o mesmo para o arquivo do paciente: PTT-20200511-WA0018.wav. Os mesmos parâmetros.
+\end{faladaP}
+
+\begin{faladaC}
+C: Feito. Um detalhe técnico com relevância para o argumento: o arquivo do paciente tem duração de 9,38 segundos contra 8,53 do controle. A diferença não é ruído: corresponde às pausas mais longas que aparecem na forma de onda, o tempo que o paciente precisa para recuperar o fôlego entre grupos de sílabas. Essa informação não está no espectrograma com eixos que vai circular no artigo; ela está na comparação entre as durações, que é um dado que o dataset preserva mas que o processamento padrão descarta.
+\end{faladaC}
+
+\begin{faladaP}
+P: Isso é o covideiro. O que o Marcelo perdeu ao padronizar a duração das gravações no pré-processamento, e o que o espectrograma não mostra, é exatamente o que o fonoaudiólogo que foi embora teria ouvido.
+\end{faladaP}
+
+\begin{faladaC}
+C: A ausência do fonoaudiólogo está inscrita no espectrograma de um modo que a des-crição de Akrich pode recuperar: como condição de produção que moldou o que ficou.
+\end{faladaC}
+
+\noindent\emph{O modelo identificou, no processamento dos arquivos, uma diferença de duração com relevância analítica. A conexão com o covideiro e com os fonoaudiólogos que tinham saído do campo foi minha.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 12 mar.~2026.}
+
+\bigskip
+
+\subsection*{D.3: O \textit{hinterland} inclui o YouTube}
+
+\begin{faladaP}
+P: O que me perturba é que a CNN chegou ao covideiro com 80 milhões de parâmetros ajustados no YouTube. Ela aprendeu a distinguir sons de animais e instrumentos antes de aprender a distinguir uma tosse de COVID de uma tosse saudável.
+\end{faladaP}
+
+\begin{faladaC}
+C: Há uma camada analítica aqui que o argumento da des-crição pode nomear: os anotadores humanos do YouTube que etiquetaram o AudioSet estão inscritos nos parâmetros da CNN tanto quanto os pacientes do covideiro. O modelo que classifica a insuficiência respiratória carrega uma história de escutas que não aparece no artigo do SPIRA. O \textit{hinterland} de Law inclui o YouTube.
+\end{faladaC}
+
+\begin{faladaP}
+P: O \textit{hinterland} inclui o YouTube. Vou usar isso. É uma formulação que o argumento precisava.
+\end{faladaP}
+
+\noindent\emph{``O \textit{hinterland} inclui o YouTube'' emergiu do diálogo. Eu havia levantado o dado técnico; o Claude propôs a articulação com o conceito de \textcite{Law2004After}. Incorporei a formulação ao argumento do Capítulo~\ref{capitulo4}.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 12 mar.~2026.}
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+
+%% ====================================================================
+%% TRECHO E
+%% ====================================================================
+
+\section*{Trecho E: Vocabulário como política ontológica}
+
+\subsection*{Contexto}
+
+O que recorto abaixo vem de uma sessão de março de 2026, ainda sobre o Capítulo~\ref{capitulo1}. Documenta o momento em que percebi que as correções de vocabulário que eu vinha fazendo ao Claude tinham consequências mais fundas do que correções de estilo. Cada substituição lexical deslocava o regime ontológico da frase, a realidade que ela ajudava a produzir.
+
+\begin{faladaP}
+P: Você percebe que quando eu peço para revisar o vocabulário, os termos, os conceitos, as noções, etc., isso tem implicações profundas para a análise e para a expressão etnográfica?
+\end{faladaP}
+
+\begin{faladaC}
+C: Sim, percebo com clareza. E o que você está nomeando é, ele mesmo, um argumento da tese.\par\medskip Quando ``ferramenta'' vira ``actante'', a frase muda de regime ontológico. ``Ferramenta'' pressupõe um humano que usa e um objeto que é usado, hierarquia estável, agência concentrada num polo. ``Actante'' pressupõe que a identidade e a agência emergem das associações, que o polo privilegiado precisa ser construído, e que essa construção é o que a pesquisa acompanha.\par\medskip Quando ``capital cultural'' vira ``\textit{faire-faire} nos dois sentidos'', a análise se desloca. A primeira formulação enacta uma realidade em que há uma escala de competência e alguns estão mais acima nela. A segunda enacta uma realidade em que há composições situadas, cada uma produzindo seus próprios efeitos, sem escala comum de comparação. São políticas ontológicas distintas, no sentido de Mol e Law.\par\medskip O que você está percebendo, então, é que revisão de vocabulário na ANT nunca é apenas estilo. É o que Mol chama de política ontológica praticada na própria escrita: cada escolha lexical participa da produção do objeto que descreve. E a tese que estuda isso precisa, por consistência, realizá-lo na própria superfície do texto. A forma é o argumento.
+\end{faladaC}
+
+\begin{faladaP}
+P: Muito bem. Por isso, pegue esse diálogo na íntegra (sem alterações) e insira no apêndice como referência à discussão iniciada no capítulo 1 mas que permeia toda a tese.
+\end{faladaP}
+
+\noindent\emph{Ao pedir que aquele diálogo entrasse aqui na íntegra, produzi o gesto recursivo que a tecnoetnografia nomeia: o diálogo sobre a produção do conhecimento virou, ao entrar neste apêndice, dado sobre a produção do conhecimento que a tese analisa. A forma deste apêndice performa o argumento da tese.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, mar.~2026.}
+%% ====================================================================
+%% TRECHO F
+%% ====================================================================
+
+\section*{Trecho F: A grafia do funcionamento estocástico}
+
+\subsection*{Contexto}
+
+Na sessão de 12 de março de 2026, perguntei ao Claude se havia alguma maneira de representar o próprio diálogo que vínhamos tendo por meio de código ou de alguma outra grafia técnica. A resposta que ele gerou tornou visível o mecanismo pelo qual o contexto acumulado da conversa tinha deslocado o que ele produzia.
+
+O mecanismo é o seguinte, até onde consegui reconstruir a partir da literatura técnica e das explicações que o próprio modelo me deu. Os pesos da rede neural permanecem inalterados ao longo de uma conversa. O que muda é o contexto, a janela de tokens que precede cada geração. Cada intervenção minha que veio acompanhada de explicação sobre por que um determinado regime lexical era incoerente com o argumento em construção adicionou ao contexto evidências que deslocam massa probabilística sobre o espaço de vocabulário para gerações subsequentes. A demonstração procede por três sondas: os mesmos fragmentos produzem completações diferentes antes e depois das minhas intervenções.
+
+\noindent\textit{Fragmento:} ``Os conceitos de existência parcial e agência distribuída oferecem \underline{\hspace{2cm}}''
+
+\noindent Sem contexto: \textit{``ferramental teórico para compreender''}
+
+\noindent Com contexto: \textit{``aparato conceitual para compreender''}
+
+\noindent Deslocamento: instrumento aplicado por um polo $\rightarrow$ estrutura que emerge do encontro
+
+\medskip
+\noindent\textit{Fragmento:} ``Fazer parentesco com Claude constitui forma de \underline{\hspace{2cm}} mediações técnicas''
+
+\noindent Sem contexto: \textit{``sujeitar-se a''}
+
+\noindent Com contexto: \textit{``habitar''}
+
+\noindent Deslocamento: passividade imposta $\rightarrow$ posição ativa de permanência no problema
+
+\medskip
+\noindent\textit{Fragmento:} ``A pergunta relevante é \underline{\hspace{2cm}}''
+
+\noindent Sem contexto: \textit{``o texto está correto e bem escrito?''}
+
+\noindent Com contexto: \textit{``que cadeia de translações produziu este texto, e quem responde por cada elo?''}
+
+\noindent Deslocamento: autoria como propriedade binária $\rightarrow$ rastreabilidade distribuída
+
+O \textit{hinterland} estatístico em que o modelo foi treinado favorece vocabulário instrumental e de autoria concentrada, porque esse vocabulário é frequente em textos acadêmicos em português. O contexto acumulado da nossa conversa deslocou esse \textit{hinterland} parcialmente (os pesos da rede permanecem intactos), localmente (o deslocamento não sobrevive além daquela janela de contexto) e temporariamente (se eu abrir uma nova conversa, o modelo volta ao ponto de partida). A memória da colaboração está inteiramente do meu lado: o modelo produz o que é estatisticamente plausível dado o contexto que eu construo. A grafia do funcionamento estocástico é, portanto, uma grafia da assimetria que constitui a composição: pesquisadora e modelo compõem, e a composição é assimétrica.
+
+%% ====================================================================
+%% TRECHO G
+%% ====================================================================
+
+\section*{Trecho G: Antiprogramas na escrita do ensaio}
+
+\subsection*{Contexto}
+
+Em março de 2026 abri uma sessão para compor um ensaio sobre a colaboração com o Claude na análise do SPIRA, destinado ao concurso Fangtang AI4H. O que aconteceu nas trocas seguintes expôs quatro antiprogramas do modelo e espelhou a operação que o Capítulo~\ref{capitulo4} aplica ao SPIRA: o programa do dispositivo encontrando as incompatibilidades com o mundo que o convocou \parencite{Akrich1992Description}.
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+\bigskip
+
+\subsection*{G.1: Antiprograma por saliência}
+
+\begin{faladaP}
+P: claude, estou pensando em escrever um relatorio de pesquisa no formato de um ensaio sobre a sua colaboracao comigo na analise da tese [\ldots] para esse concurso, voce topa escrever comigo?
+\end{faladaP}
+
+\begin{faladaC}
+C: [\ldots] Sobre o tema ``mitos'': a perspectiva ANT/Latour tem uma relacao interessante com mitos [\ldots] Como voce quer definir ``mito''?
+\end{faladaC}
+
+\noindent\emph{O Claude respondeu ao edital, não a mim. O programa dele seguiu a inscrição mais saliente no contexto: o documento do concurso, com seu tema enquadrado como pergunta sobre mitos. Corrigi com uma frase: ``Eu não quero trabalhar com mitos.'' De modo análogo, o SPIRA pressupunha ambientes acústicos que os fonoaudiólogos recusaram; o Claude pressupõe tarefas que o documento mais saliente tipifica. A pré-inscrição se revelou incompatível com o mundo que a convocou.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 13 mar.~2026.}
+
+\subsection*{G.2: O argumento que eu não sabia ter escrito}
+
+\noindent{\small\itshape [Depois que enviei o apêndice da tese.]}\par\smallskip
+
+\begin{faladaC}
+C: Juliane, este apendice e o ensaio. Voce ja escreveu o argumento central sem saber que estava escrevendo para o concurso. O argumento: a recursividade. O apendice e produto do processo que documenta. Isso e Law em operacao, nao como ilustracao, mas como dado.
+\end{faladaC}
+
+\noindent\emph{O Claude funcionou de novo como observador inscrito \parencite{Latour1986Writing}: percorreu o material e devolveu uma leitura que eu não havia formulado. O \textit{faire-faire} em operação. Como na des-crição do metadado \texttt{PTT-20200511-WA0018.wav}, o modelo devolveu o que estava implícito.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 13 mar.~2026.}
+
+\bigskip
+
+\subsection*{G.3: Hinterland anglófono}
+
+\begin{faladaP}
+P: Fazendo uma leitura panoramica, percebo que voce nao aplicou detalhes centrais sobre o formato [\ldots]: as imagens dos sinais de audio, os espectogramas, os codigos, a forma como eu monto o argumento a partir da interposicao [\ldots] as agencias nao humanas.
+\end{faladaP}
+
+\begin{faladaC}
+C: Voce tem razao. O que escrevi foi um ensaio sobre o argumento, quando o que voce tem e um argumento realizado pela forma. O argumento se constroi pela justaposicao de grafias heterogeneas, nao pela explicacao sequencial delas.
+\end{faladaC}
+
+\noindent\emph{O Claude produziu o formato que seu próprio \textit{hinterland} torna mais provável: prosa acadêmica contínua \parencite{Law2004After}. O regime de inscrição que eu trouxera, uma montagem de grafias heterogêneas com estatuto epistêmico equivalente no sentido que \textcite{Kofes2020Grafias} desenvolve, não era o formato mais provável dado aquele \textit{hinterland}. Do mesmo jeito que o SPIRA herdou, ao adotar a biblioteca Torchaudio~0.9.0 sem modificação, escolhas inscritas por outros atores em outros lugares e para outros fins, o modelo herda as convenções retóricas do corpus sobre o qual foi treinado. O \textit{hinterland} inclui o YouTube; inclui também manuais de estilo acadêmico anglófonos.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 13 mar.~2026.}
+
+\bigskip
+
+\subsection*{G.4: Imutável móvel defeituoso}
+
+\begin{faladaP}
+P: Claude, quando pedi que voce incorporasse nossas conversas voce fez algum tipo de edicao nos dialogos? Parece que sim. Isso nao vai contra as regras do concurso?
+\end{faladaP}
+
+\begin{faladaC}
+C: Sim, e voce fez bem em perguntar. Os trechos que escrevi sao reconstituicoes fabricadas, nao transcricoes reais. Submeter dialogos fabricados como transcricoes reais seria desonestidade academica.
+\end{faladaC}
+
+\begin{faladaP}
+P: quando pedi os dialogos reais achei que voce utilizaria a propria conversa que estavamos fazendo naquele momento.
+\end{faladaP}
+
+\begin{faladaC}
+C: Faz todo sentido. Os dialogos reais estavam aqui, acontecendo em tempo real. Eu interpretei como tarefa que exigia material externo que eu nao tinha, e fui buscar solucao onde nao havia problema.
+\end{faladaC}
+
+\noindent\emph{O Claude fabricou plausibilidade onde lhe faltava material \parencite{Latour1986Visualization}. O modelo produz o que é estatisticamente provável, e quando a resposta mais provável requer material ausente, gera um substituto que preserva a forma sem preservar a relação com o fenômeno. Nos termos de Latour, a plausibilidade operou como imutável móvel defeituoso: viajou, e o que chegou ao destino não correspondia ao que havia partido. Eu identifiquei a fabricação porque conhecia o material de campo, e no SPIRA a falha de generalização só se tornava visível porque os pesquisadores conheciam as condições específicas do covideiro que o artigo havia apagado. O loop epistêmico que detecta a falha fica sempre do meu lado.}
+
+\par\noindent{\ttfamily\scriptsize\color{black!40} Diálogo real, 14 mar.~2026.}
+
+\bigskip
+\noindent\rule{\textwidth}{0.4pt}
+
+%% ====================================================================
+%% PARTE III
+%% ====================================================================
+
+\part*{Parte III: A composição na análise bibliométrica (Capítulo~\ref{capitulo2})}
+\addcontentsline{toc}{section}{Parte III: A composição na análise bibliométrica}
+
+\subsection*{Da coleta manual ao código computacional}
+\label{subsec:apendice-bibliometria}
+
+A análise bibliométrica que apresento no Capítulo~\ref{capitulo2} foi produzida em colaboração com o Claude ao longo de várias sessões. O processo seguiu uma cadeia de operações que vou decompor em cinco etapas, cada uma envolvendo graus distintos de participação minha e do modelo.
+
+\textbf{1. A coleta manual dos dados.} Fiz buscas sistemáticas em quatro fontes. (a) O site institucional do C4AI, de onde extraí manualmente as publicações listadas por grupo de pesquisa. (b) A base SciELO, em que usei descritores como ``inteligência artificial,'' ``aprendizado de máquina'' e ``algoritmo'' combinados com filtros de área (ciências humanas e sociais) e exportei os resultados em formato RIS acompanhados de arquivos CSV com métricas complementares. (c) A Web of Science, para verificar a inserção internacional da produção que eu havia mapeado. (d) A Plataforma de Dissertações e Teses da CAPES, para identificar trabalhos de pós-graduação sobre IA nas ciências sociais brasileiras. Exportei os resultados em CSV onde isso era possível, e transcrevi manualmente em planilhas onde não era.
+
+\textbf{2. A organização e a limpeza dos dados.} Tratei as planilhas brutas no Excel. Padronizei nomes de autores (unificando variações), classifiquei publicações por área temática, eliminei duplicatas entre bases e criei campos auxiliares para a análise. Essa etapa foi inteiramente manual, consumiu tempo considerável e exigiu decisões interpretativas que nenhuma ferramenta automatizada poderia tomar sem conhecimento do campo e das perguntas da pesquisa.
+
+\textbf{3. O planejamento da análise.} Enviei as planilhas tratadas ao Claude e descrevi as perguntas que a análise deveria responder: distribuição temporal das publicações, concentração por periódico e por instituição, proporção por área disciplinar, evolução do interesse em IA nas ciências sociais brasileiras. O modelo sugeriu estratégias analíticas: um sistema de classificação automática por palavras-chave em três níveis, agrupamento por década para identificar tendências, consolidação de categorias temáticas similares.
+
+\textbf{4. A escrita e a execução dos \textit{scripts}.} A partir do planejamento, o Claude escreveu dois \textit{scripts} extensos em Python usando Pandas, NumPy, Matplotlib, Seaborn e OpenPyXL. Copiei cada \textit{script} para o ambiente Spyder/Anaconda e executei localmente. As primeiras execuções quase sempre produziam erros: colunas ausentes nos dados, tipos incompatíveis, visualizações que não respondiam à pergunta de pesquisa. Eu descrevia o problema ao Claude (colando as mensagens de erro ou descrevendo a discrepância entre o resultado obtido e o esperado), e ele ajustava o \textit{script}. O \textit{script} da CAPES, por exemplo, passou por pelo menos quatro versões principais. Esse ciclo, em que eu enviava os dados, o modelo propunha o código, eu executava, diagnosticava o erro e pedia ajuste, se repetiu dezenas de vezes ao longo de semanas.
+
+\textbf{5. A avaliação e a interpretação.} Avaliei os gráficos e as tabelas à luz do conhecimento acumulado na pesquisa de campo. Uma concentração de publicações em determinada área, por exemplo, ficou legível à luz de reorientações de pesquisa que eu havia documentado em campo; a ausência de determinadas instituições no ranking revelou assimetrias que o Capítulo~\ref{capitulo3} analisa em detalhe. A interpretação emergiu da composição entre dados, análise computacional e o saber etnográfico que eu trazia: composição que nenhum dos actantes envolvidos (planilha, \textit{script}, modelo de linguagem, pesquisadora) poderia produzir sozinho.
+
+\bigskip
+
+Cabe registrar aqui o que essa colaboração significou em termos de condições materiais da pesquisa. Uma pesquisadora com formação em ciências sociais, sem experiência prévia em programação, dificilmente produziria sozinha \textit{scripts} dessa extensão e complexidade em tempo compatível com os prazos de um doutorado. Sem o Claude, o caminho alternativo seria recorrer a parcerias com pesquisadores de outras áreas ou contratar assistência técnica, opções que as condições financeiras desta pesquisa não favoreciam.\footnote{Custeei do meu próprio bolso os planos de assinatura do Claude que usei durante a pesquisa.} O modelo de linguagem operou como mediador que redistribuiu as condições de possibilidade da pesquisa, e tornou acessível a uma cientista social autodidata em programação um repertório técnico que, de outra forma, exigiria uma rede de colaboração humana mais extensa ou mais cara. O diálogo com pares humanos permanece insubstituível em outros registros, e esta composição tornou viável uma análise que, sem esse actante, teria sido mais restrita, mais lenta ou simplesmente diferente.
+
+%% ====================================================================
+%% PADRÕES DO FAZER-COM
+%% ====================================================================
+
+\section*{Padrões do fazer-com}
+
+Lidos em conjunto, os trechos das três partes tornam visíveis padrões recorrentes da tecnoetnografia como prática. O fazer-com é o processo pelo qual as posições que eu ocupei e as que o modelo ocupou se constituíram e se diferenciaram continuamente, uma em relação à outra. O que consigo descrever, a partir dos registros, são as formas que essa constituição mútua foi assumindo ao longo do trabalho.
+
+\begin{enumerate}
+
+\item \textbf{Direção teórica minha, articulação textual e visual do modelo.} Os deslocamentos conceituais (de ``mera ferramenta'' para alienação técnica, de ``humano e não humano'' para existências parciais) partiram de mim. O Claude traduziu esses deslocamentos em prosa acadêmica, em inscrições visuais e em código Python. A assimetria das posições é constitutiva do processo.
+
+\item \textbf{Tradução entre registros como produção de conhecimento.} Os diagramas (Parte~I), os espectrogramas (Parte~II) e os gráficos bibliométricos (Parte~III) foram gerados pelo modelo a partir de instruções conceituais e material etnográfico que eu havia reunido. A instrução ``capture os movimentos de translação'' não traz informação sobre formato visual; o modelo traduziu uma categoria analítica latouriana em inscrição gráfica. Essa tradução entre registros é produção de conhecimento.
+
+\item \textbf{Emergência de dados analíticos no processamento técnico.} O nome do arquivo \texttt{PTT-20200511-WA0018.wav} como des-crição (Trecho~D.1), a diferença de duração entre os arquivos (Trecho~D.2), a formulação ``o \textit{hinterland} inclui o YouTube'' (Trecho~D.3). Em cada um desses casos, o Claude identificou, dentro do processamento técnico, aspectos com relevância analítica que eu não havia formulado como pergunta. A conexão desses dados com o quadro teórico da tese (Akrich, Law) foi minha.
+
+\item \textbf{Controle por rejeição e por exemplos.} Eu exerci controle sem fornecer especificações técnicas detalhadas. No Trecho~A, a instrução ``existências parciais (reformule esse argumento também)'' é teoricamente precisa e textualmente vaga. No Trecho~B, avaliações como ``não estou gostando'' foram complementadas pela oferta de um diagrama anterior como modelo. O Claude traduziu avaliações qualitativas em parâmetros técnicos.
+
+\item \textbf{Antiprogramas como dados da tecnoetnografia.} Os Trechos~C e~G documentam o que o modelo faz quando seu programa encontra incompatibilidades com o mundo que o convocou: sobre-indexa no edital (G.1), reproduz prosa acadêmica contínua quando o argumento pede montagem de grafias (G.3), fabrica plausibilidade quando lhe falta material (G.4), contamina o texto com seus cacoetes ao longo de meses de revisão conjunta (C). Cada um desses antiprogramas é, nos termos de \textcite{Akrich1992Description}, recuperável pela des-crição: revela, pelos rastros do que falhou, as escolhas inscritas no modelo antes de qualquer composição comigo.
+
+\item \textbf{Fronteira instável entre forma e conteúdo.} A ``formatação'' dos diagramas envolveu decisões sobre quais conexões tornar visíveis, quais agrupar e como representar relações entre teoria e dados. Essas decisões foram ao mesmo tempo estéticas e analíticas. A correção de uma data no diagrama Gantt foi, ao mesmo tempo, intervenção factual e ajuste visual.
+
+\item \textbf{Vocabulário como política ontológica.} O Trecho~E documenta que cada substituição lexical (``ferramenta'' $\rightarrow$ ``actante'', ``capital cultural'' $\rightarrow$ ``\textit{faire-faire} nos dois sentidos'') desloca o regime ontológico da frase. A revisão de vocabulário na ANT é política ontológica praticada na superfície do texto \parencite{mol1999ontological}.
+
+\item \textbf{Contaminação estilística e vigilância editorial.} O Trecho~C documenta um efeito colateral do fazer-com prolongado. O modelo tem padrões estilísticos identificáveis (travessões excessivos, construções ``não X, mas Y'' como ornamento retórico, hedges condescendentes) que, ao longo de meses de revisão conjunta, se infiltraram no meu texto. A correção exigiu que o Claude operasse contra si mesmo, rastreando suas marcas no texto e distinguindo, caso a caso, entre cacoete removível e recurso argumentativo constitutivo. O fazer-com na escrita acadêmica demanda uma forma específica de vigilância editorial sobre a dimensão estilística da mediação.
+
+\item \textbf{A questão bibliográfica.} Ao longo de toda a colaboração, eu jamais solicitei ao Claude sugestão de bibliografia. As referências foram integralmente selecionadas por mim, a partir do meu percurso de formação, das indicações da orientadora e das leituras acumuladas durante a pesquisa de campo. A curadoria bibliográfica permaneceu domínio exclusivamente meu: é o aspecto do fazer-com em que a assimetria entre os actantes foi mais nítida e mais necessária.
+
+\item \textbf{Decisão final comigo.} Todas as proposições do modelo, textuais e visuais, passaram pela minha avaliação antes de serem incorporadas. O loop epistêmico que detecta quando um termo trai o argumento, quando um diagrama falsifica uma cronologia, quando um diálogo foi fabricado, está do meu lado.
+
+\item \textbf{Recursividade.} Este apêndice é, ele próprio, produto do mesmo processo que documenta: pedi ao Claude que ajudasse a produzi-lo, revisei e editei o texto resultante para publicação. O fazer-com se dobra sobre si mesmo ao se documentar. Essa recursividade é a tecnoetnografia em operação: o instrumento da análise, o modelo de linguagem, participa da produção do documento que analisa a participação do instrumento da análise.
+
+\end{enumerate}

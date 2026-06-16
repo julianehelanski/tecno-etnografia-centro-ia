@@ -1,0 +1,141 @@
+\documentclass[10pt, letterpaper, oneside]{book} % Mantido 10pt para não aumentar o corpo do texto
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Configuração: pacotes %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{pacotes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatação de Títulos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+
+% Define a profundidade da numeração e do sumário para nível 3 (subsubsection)
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% Aumentando APENAS o tamanho dos títulos explicitamente:
+\titleformat{\chapter}[display]
+  {\normalfont\fontsize{18}{22}\selectfont\bfseries} % Aumentado para 18pt
+  {\chaptertitlename\ \thechapter}
+  {10pt}
+  {}
+
+\titleformat{\section}{\normalfont\fontsize{15}{18}\selectfont\bfseries}{\thesection}{1em}{} % Aumentado para 15pt
+\titleformat{\subsection}{\normalfont\fontsize{13}{16}\selectfont\bfseries}{\thesubsection}{1em}{} % Aumentado para 13pt
+\titleformat{\subsubsection}{\normalfont\fontsize{11}{14}\selectfont\bfseries}{\thesubsubsection}{1em}{} % Aumentado para 11pt
+
+% Ajuste da legenda (Captions) para 8pt (mantendo a proporção menor que o corpo)
+\DeclareCaptionFont{tenpt}{\fontsize{8}{10}\selectfont}
+\captionsetup{font=tenpt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Dados %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\autor}{Nome completo do aluno}
+\newcommand{\titulo}{Título da defesa}
+\def\aplicada{}
+\newcommand{\orientador}{Nome completo do orientador}
+\newcommand{\coorientador}{Nome completo do coorientador}
+\newcommand{\ano}{Ano}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Configurações %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{configuracao}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Documento %%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Força a numeração arábica (1, 2, 3...) desde a primeira página
+\pagenumbering{arabic} 
+\pagestyle{plain}
+
+%%% CAPA
+\input{capa}
+\clearpage
+
+%%% FOLHA DE ROSTO
+\input{folha-de-rosto}
+\clearpage
+
+%%% FICHA CATALOGRÁFICA
+\includepdf[pagecommand={\thispagestyle{plain}}]{ficha-catalografica}
+
+%%% FOLHA DE APROVAÇÃO
+\includepdf[pagecommand={\thispagestyle{plain}}]{folha-de-aprovacao}
+
+%%% DEDICATÓRIA
+\input{dedicatoria}
+\clearpage
+
+%%% AGRADECIMENTOS
+\input{agradecimentos}
+\clearpage
+
+%%% EPÍGRAFE
+\input{epigrafe}
+\clearpage
+
+%%% RESUMO
+\chapter*{Resumo}
+\addcontentsline{toc}{chapter}{Resumo}
+\input{resumo}
+\clearpage
+
+%%% ABSTRACT
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\input{abstract}
+\clearpage
+
+%%% LISTA DE ILUSTRAÇÕES
+\renewcommand{\listfigurename}{Lista de Ilustrações}
+\listoffigures
+\clearpage
+
+%%% LISTA DE TABELAS
+\listoftables
+\clearpage
+
+%%% ABREVIAÇÕES
+\input{abreviacoes}
+\clearpage
+
+%%% SÍMBOLOS
+\input{simbolos}
+\clearpage
+
+%%% SUMÁRIO
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% CORPO %%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{ex_cap0}
+\input{ex_cap1}
+\input{ex_cap2}
+\input{ex_cap3}
+\input{ex_cap4}
+\input{ex_cap5}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% REFERÊNCIAS %%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Referências}
+\printbibliography[title=Referências]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\appendix
+%\input{glossario}
+%%\input{ex_ape1}
+%\input{ex_ape2}
+%\input{ex_ape3}
+%\input{ex_ape4}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Anexos}
+\addcontentsline{toc}{chapter}{Anexos}
+\input{ex_ane1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% LICENÇAS %%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{cc-by}
+\input{cc-by-sa}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% ÍNDICE %%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Índice Remissivo}
+\printindex
+
+\end{document}

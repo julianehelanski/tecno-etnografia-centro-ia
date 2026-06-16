@@ -1,0 +1,208 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pacotes básicos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,english]{babel}
+\usepackage{csquotes}
+\usepackage[top=3cm,bottom=2cm,right=2cm,left=3cm]{geometry}
+\usepackage{cmap}
+
+\usepackage{wasysym}
+\usepackage{newunicodechar}
+\newunicodechar{☺}{\smiley}
+\usepackage{siunitx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fontes e matemática %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lmodern}
+\usepackage{pdfpages}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{mathrsfs}
+\usepackage{lscape}
+\usepackage{csquotes}
+\usepackage[most]{tcolorbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cores %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% MARCAÇÕES DE REVISÃO %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xcolor}  % provavelmente já carregado em pacotes.tex
+
+% Cores das marcações
+\definecolor{marcaA}{RGB}{180, 240, 180}  % verde (Camada A: aplicada)
+\definecolor{marcaB}{RGB}{255, 240, 100}  % amarelo (Camada B: sugestão)
+\definecolor{marcaS}{RGB}{255, 200, 200}  % rosa (Suely)
+
+% Reduz a borda do colorbox para não destacar demais
+\setlength{\fboxsep}{1pt}
+
+% Versão de revisão (com cores) -- ATIVA AGORA:
+\newcommand{\mB}[2]{\colorbox{marcaB}{#2}\textsuperscript{\textbf{\textcolor{blue!70!black}{#1}}}}
+\newcommand{\mS}[2]{\colorbox{marcaS}{#2}\textsuperscript{\textbf{\textcolor{red!70!black}{#1}}}}
+\newcommand{\mA}[2]{\colorbox{marcaA}{#2}\textsuperscript{\textbf{\textcolor{green!40!black}{#1}}}}
+
+% Versão de defesa (sem cores) -- INATIVA. Para desligar marcações antes da defesa,
+% comente as três linhas acima e descomente as três abaixo:
+% \newcommand{\mA}[2]{#2}
+% \newcommand{\mB}[2]{#2}
+% \newcommand{\mS}[2]{#2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{setspace}
+\setstretch{1.5}
+\usepackage{changepage}
+\usepackage{indentfirst}
+\setlength{\parindent}{1.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cabeçalho %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[R]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Notas de rodapé %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[bottom,hang]{footmisc}
+\setlength{\footnotemargin}{0em}
+
+\let\oldfootnote\footnote
+\renewcommand{\footnote}[1]{%
+  \oldfootnote{\fontsize{8.5}{10.5}\selectfont #1}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Citação ABNT (ambiente) %%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{citacaoabnt}{%
+  \begin{singlespace}
+  \begin{adjustwidth}{4cm}{0cm}
+  \fontsize{9}{11}\selectfont
+}{%
+  \end{adjustwidth}
+  \end{singlespace}
+  \vspace{0.5\baselineskip}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Epígrafe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\epigrafe}[2]{%
+  \vspace{0.5\baselineskip}
+  \begin{flushright}
+  \begin{minipage}{0.6\textwidth}
+  \begin{singlespace}
+  \fontsize{9}{11}\selectfont\itshape
+  #1
+  \end{singlespace}
+  \vspace{2pt}
+  \fontsize{9}{11}\selectfont --- #2
+  \end{minipage}
+  \end{flushright}
+  \vspace{\baselineskip}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliografia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliografia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  dashed=false,      % <--- Adicione esta linha para repetir os nomes
+  sortcites=true,
+  sorting=nty,       
+  hyperref=true,
+  backref=true,
+  backrefstyle=none,
+  uniquename=false
+]{biblatex}
+
+\addbibresource{biblatex_style_samples/sample.bib}
+\addbibresource{biblatex_style_samples/sample-abel.bib}
+
+\DefineBibliographyStrings{brazilian}{%
+  backrefpage  = {Citado na p.},
+  backrefpages = {Citado nas pp.}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tabelas 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\AtBeginEnvironment{longtable}{\singlespacing\fontsize{9}{11}\selectfont}
+\AtBeginEnvironment{tabular}{\singlespacing\fontsize{9}{11}\selectfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Algoritmos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Código %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,listings}
+
+\newtcblisting{codigo}[1][]{%
+  listing only,
+  listing options={
+    language=Python,
+    basicstyle=\normalsize\ttfamily,
+    breaklines=true,
+    numbers=none
+  },
+  colback=white,
+  colframe=white,
+  boxrule=0pt,
+  left=1.5cm
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Figuras e legendas %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
+\captionsetup{
+  labelfont=bf,
+  textfont=normalfont
+}
+
+% BOTÃO "voltar para lista de figuras"
+\usepackage{etoolbox}
+\pretocmd{\listoffigures}{\phantomsection}{}{}
+
+\DeclareCaptionFormat{figback}{#1#2#3\hfill\hyperlink{lof}{\footnotesize$\uparrow$ Lista}}
+\captionsetup[figure]{format=figback}
+
+\AtBeginDocument{
+  \addtocontents{lof}{\protect\hypertarget{lof}{}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LINKS (PROFISSIONAL) %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdfencoding=auto]{hyperref}
+
+
+\hypersetup{
+  pdftitle={\titulo},
+  pdfauthor={\autor},
+  pdfsubject={Tese de Doutorado},
+
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue!50!black,
+
+  breaklinks=true,
+  bookmarksopen=true,
+  bookmarksnumbered=true,
+  pdfstartview=FitH,
+  pdfpagemode=UseOutlines
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NÃO redefinir \frontmatter (evita erros)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Índice %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{makeidx}
+\makeindex
