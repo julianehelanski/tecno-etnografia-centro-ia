@@ -12,9 +12,10 @@ name: Notifica tecno-etnografia-tese-site
 on:
   push:
     branches: [main]
-    paths:
+        paths:
       - "ex_cap*.tex"
       - "**/ex_cap*.tex"
+      - "figuras/**"
   # permite disparar manualmente em Actions -> Run workflow
   workflow_dispatch:
 
