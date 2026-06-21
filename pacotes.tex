@@ -17,14 +17,12 @@
 \usepackage{amsmath, amssymb, amsfonts, amsthm}
 \usepackage{mathrsfs}
 \usepackage{lscape}
-\usepackage{csquotes}
 \usepackage[most]{tcolorbox}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cores %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% MARCAÇÕES DE REVISÃO %%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{xcolor}  % provavelmente já carregado em pacotes.tex
-
 % Cores das marcações
 \definecolor{marcaA}{RGB}{180, 240, 180}  % verde (Camada A: aplicada)
 \definecolor{marcaB}{RGB}{255, 240, 100}  % amarelo (Camada B: sugestão)
@@ -101,29 +99,7 @@
   \vspace{\baselineskip}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliografia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliografia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[
-  backend=biber,
-  style=authoryear,
-  dashed=false,      % <--- Adicione esta linha para repetir os nomes
-  sortcites=true,
-  sorting=nty,       
-  hyperref=true,
-  backref=true,
-  backrefstyle=none,
-  uniquename=false
-]{biblatex}
-
-\addbibresource{biblatex_style_samples/sample.bib}
-\addbibresource{biblatex_style_samples/sample-abel.bib}
-
-\DefineBibliographyStrings{brazilian}{%
-  backrefpage  = {Citado na p.},
-  backrefpages = {Citado nas pp.}
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tabelas 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tabelas %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -140,7 +116,6 @@
 \renewcommand{\listalgorithmname}{Lista de Algoritmos}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Código %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable,listings}
 
 \newtcblisting{codigo}[1][]{%
@@ -160,7 +135,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Figuras e legendas %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage{float}
 
 \captionsetup{
   labelfont=bf,
@@ -179,25 +153,53 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LINKS (PROFISSIONAL) %%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IMPORTANTE: Carregado ANTES do biblatex para corrigir o descompasso de páginas
 \usepackage[pdfencoding=auto]{hyperref}
-
 
 \hypersetup{
   pdftitle={\titulo},
   pdfauthor={\autor},
   pdfsubject={Tese de Doutorado},
-
   colorlinks=true,
   linkcolor=black,
   citecolor=black,
   urlcolor=blue!50!black,
-
   breaklinks=true,
   bookmarksopen=true,
   bookmarksnumbered=true,
   pdfstartview=FitH,
   pdfpagemode=UseOutlines
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bibliografia %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  dashed=false,      
+  sortcites=true,
+  sorting=nty,       
+  hyperref=true,
+  backref=true,
+  backrefstyle=none,
+  uniquename=false
+]{biblatex}
+
+\addbibresource{biblatex_style_samples/sample.bib}
+\addbibresource{biblatex_style_samples/sample-abel.bib}
+
+\DefineBibliographyStrings{brazilian}{%
+  backrefpage  = {Citado na p.},
+  backrefpages = {Citado nas pp.}
+}
+
+% Vírgula entre nome e ano nas citações: (Austrian 2020) -> (Austrian, 2020)
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+
+% Obs.: o "descompasso" dos links "Citado na p." NÃO se resolve aqui no biblatex,
+% e sim no hyperref. A causa era a duplicação de âncoras de página (pré-textual em
+% arábico 1,2,3... + corpo recomeçando em 1). A correção está em tese.tex:
+% \hypersetup{pageanchor=false} no pré-textual e \hypersetup{pageanchor=true} na
+% Apresentação. O antigo \let\abspage@backref\backref era um no-op e foi removido.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NÃO redefinir \frontmatter (evita erros)
@@ -206,3 +208,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Índice %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{makeidx}
 \makeindex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONFIGURAÇÃO AUTOMÁTICA DE INÍCIO DO DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{
+  % Define que o documento começa sem cabeçalhos/números de página (Capa, Sumário, etc.)
+  \pagestyle{empty}
+}
+
+% Comando customizado para você colocar exatamente onde começa a Apresentação
+\newcommand{\iniciarParteTextual}{%
+  \clearpage
+  \pagestyle{fancy}           % Ativa o cabeçalho configurado (número no canto direito)
+  \pagenumbering{arabic}      % Transforma a numeração em arábica (1, 2, 3...)
+  \setcounter{page}{1}        % Reseta o contador para começar na página 1
+}

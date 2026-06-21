@@ -1,11 +1,14 @@
 \documentclass[10pt, letterpaper, oneside]{book} % Mantido 10pt para não aumentar o corpo do texto
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Configuração: pacotes %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{pacotes}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatação de Títulos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{titlesec}
 % Define a profundidade da numeração e do sumário para nível 3 (subsubsection)
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+
 % Aumentando APENAS o tamanho dos títulos explicitamente:
 \titleformat{\chapter}[display]
   {\normalfont\fontsize{18}{22}\selectfont\bfseries} % Aumentado para 18pt
@@ -15,9 +18,11 @@
 \titleformat{\section}{\normalfont\fontsize{15}{18}\selectfont\bfseries}{\thesection}{1em}{} % Aumentado para 15pt
 \titleformat{\subsection}{\normalfont\fontsize{13}{16}\selectfont\bfseries}{\thesubsection}{1em}{} % Aumentado para 13pt
 \titleformat{\subsubsection}{\normalfont\fontsize{11}{14}\selectfont\bfseries}{\thesubsubsection}{1em}{} % Aumentado para 11pt
+
 % Ajuste da legenda (Captions) para 8pt (mantendo a proporção menor que o corpo)
 \DeclareCaptionFont{tenpt}{\fontsize{8}{10}\selectfont}
 \captionsetup{font=tenpt}
+
 %%%%%%%%%%%%%%%%%%%%%%%%% Dados %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\autor}{Nome completo do aluno}
 \newcommand{\titulo}{Título da defesa}
@@ -25,99 +30,132 @@
 \newcommand{\orientador}{Nome completo do orientador}
 \newcommand{\coorientador}{Nome completo do coorientador}
 \newcommand{\ano}{Ano}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Configurações %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{configuracao}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% Documento %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-% Pré-textual: numeração romana (conta as páginas e gera âncoras únicas
-% para os hiperlinks), com pagestyle empty para não imprimir o número.
-\pagenumbering{roman}
+
+% Pré-textual: Sem numeração romana. Começa totalmente limpo (empty),
+% sem imprimir absolutamente nada nos cabeçalhos ou rodapés.
 \pagestyle{empty}
+% Desliga as âncoras de página do hyperref no pré-textual. Como aqui o contador
+% ainda está em arábico (1, 2, 3...) e o corpo recomeça em 1, sem isto haveria
+% âncoras duplicadas (page.1, page.2...) e os links "Citado na p." voltariam
+% para a página errada. São religadas na Apresentação (ver abaixo).
+\hypersetup{pageanchor=false}
+
 %%% CAPA
 \input{capa}
 \clearpage
+
 %%% FOLHA DE ROSTO
 \input{folha-de-rosto}
 \clearpage
+
 %%% FICHA CATALOGRÁFICA
-%\includepdf[pagecommand={\thispagestyle{empty}}]{ficha-catalografica}
+\includepdf[pagecommand={\thispagestyle{empty}}]{ficha-catalografica}
+
 %%% FOLHA DE APROVAÇÃO
-%\includepdf[pagecommand={\thispagestyle{empty}}]{folha-de-aprovacao}
+\includepdf[pagecommand={\thispagestyle{empty}}]{folha-de-aprovacao}
+
 %%% DEDICATÓRIA
 \input{dedicatoria}
 \clearpage
+
 %%% AGRADECIMENTOS
 \input{agradecimentos}
 \clearpage
+
 %%% EPÍGRAFE
 \input{epigrafe}
 \clearpage
+
 %%% RESUMO
 \chapter*{}
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{Resumo}
 \input{resumo}
 \clearpage
+
 %%% ABSTRACT
 \chapter*{}
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{Abstract}
 \input{abstract}
 \clearpage
+
 %%% LISTA DE ILUSTRAÇÕES
 \renewcommand{\listfigurename}{Lista de Ilustrações}
 \listoffigures
 \thispagestyle{empty}
 \clearpage
+
 %%% LISTA DE TABELAS
 \listoftables
 \thispagestyle{empty}
 \clearpage
+
 %%% ABREVIAÇÕES
 \input{abreviacoes}
 \clearpage
+
 %%% SÍMBOLOS
 \input{simbolos}
 \clearpage
+
 %%% SUMÁRIO
 \tableofcontents
 \thispagestyle{empty}
 \clearpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% CORPO %%%%%%%%%%%%%%%%%%%%%%%%%%
-% Reinicia o número impresso em 1 na Introdução e volta a imprimi-lo.
-% Numeração arábica não colide com as âncoras romanas do pré-textual,
-% mantendo os hiperlinks de citação apontando para a página física correta.
+% Remove qualquer resíduo das páginas anteriores, ativa a numeração arábica 
+% iniciando obrigatoriamente na página 1 (física e lógica) e habilita seu 
+% estilo de cabeçalho (fancy) definido no preâmbulo.
 \clearpage
 \pagenumbering{arabic}
-\pagestyle{plain}
-\input{ex_cap0}   % Introdução
+\setcounter{page}{1}
+\hypersetup{pageanchor=true} % Religa as âncoras de página: a partir daqui
+                             % page.1, page.2... são únicas e os links "Citado
+                             % na p." passam a voltar para a página correta.
+\pagestyle{fancy}
+
+\input{ex_cap0}   % Apresentação / Introdução (Será a página 1 oficial)
 \input{ex_cap1}
 \input{ex_cap2}
 \input{ex_cap3}
 \input{ex_cap4}
 \input{ex_cap5}   % Conclusões
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% REFERÊNCIAS %%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{Referências}
 \printbibliography[title=Referências]
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\appendix
 %\input{glossario}
-%%\input{ex_ape1}
+%\input{ex_ape1}
 %\input{ex_ape2}
 %\input{ex_ape3}
 %\input{ex_ape4}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\chapter*{Anexos}
 %\addcontentsline{toc}{chapter}{Anexos}
 %\input{ex_ane1}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% LICENÇAS %%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{cc-by}
 \input{cc-by-sa}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%% ÍNDICE %%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \phantomsection
 \addcontentsline{toc}{chapter}{Índice Remissivo}
 \printindex
+
 \end{document}
