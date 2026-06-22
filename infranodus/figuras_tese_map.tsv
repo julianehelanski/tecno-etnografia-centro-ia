@@ -1,0 +1,61 @@
+# Mapa de sincronização: figuras da TESE -> figuras do SITE.
+# Formato (TAB):  <destino no site>\t<origem na tese (glob; '*' cobre timestamps de data)>
+# A cada atualização da tese, scripts/sync_tese_figuras.py copia a origem mais
+# recente que casa com o glob para o destino no site. Acrescente linhas conforme
+# novas figuras passarem a ser exibidas no site (veja docs/sync-figuras-tese.md).
+figuras/Vero_48H_corona_filopodio_1_dentro.jpg	figuras/cap.4/covid/Vero_48H_corona_filopodio_1_dentro.jpg
+figuras/Vero_48H_corona_filopodio_2_dentro.jpg	figuras/cap.4/covid/Vero_48H_corona_filopodio_2_dentro.jpg
+figuras/Vero_72H_corona_filopodio_3_dentro.jpg	figuras/cap.4/covid/Vero_72H_corona_filopodio_3_dentro.jpg
+figuras/cadeia-translacao-condensada-capitulo4-2026-04-15-202330.png	figuras/cap.4/diagramas-mermaid/cadeia-translacao-condensada-capitulo4-*.png
+figuras/cadeia-translacao-spira-2026-03-11-130346.png	figuras/cap.4/diagramas-mermaid/cadeia-translacao-spira-capitulo4-*.png
+figuras/cap1/cap1-caderno-campo.jpg	figuras/cap.1/caderno_quadro.jpg
+figuras/cap1/cap1-grade-tres-planos.png	figuras/cap.1/grade_tres_planos.png
+figuras/cap1/cap1-urdidura.png	figuras/cap.1/mapa-capitulo1.png
+figuras/cap2/cap2-bib-capes-grande-area.png	figuras/cap.2/bibliometria/capes_11_grande_area_share.png
+figuras/cap2/cap2-bib-capes-heatmap-kw.png	figuras/cap.2/bibliometria/capes_13_heatmap_area_keyword.png
+figuras/cap2/cap2-bib-capes-heatmap-sub.png	figuras/cap.2/bibliometria/capes_22_heatmap_subcampo_grande_area.png
+figuras/cap2/cap2-bib-capes-humanas-temporal.png	figuras/cap.2/bibliometria/capes_h02_temporal_humanas.png
+figuras/cap2/cap2-bib-capes-humanas.png	figuras/cap.2/bibliometria/capes_h01_areas_humanas.png
+figuras/cap2/cap2-bib-capes-subcampos.png	figuras/cap.2/bibliometria/capes_21_subcampos_distribuicao.png
+figuras/cap2/cap2-bib-comparativo.png	figuras/cap.2/bibliometria/comparativo_scielo_capes_2026.png
+figuras/cap2/cap2-bib-scielo-area.png	figuras/cap.2/bibliometria/scielo_11_subject_area_share.png
+figuras/cap2/cap2-bib-scielo-subcampos.png	figuras/cap.2/bibliometria/scielo_21_subcampos_distribuicao.png
+figuras/cap2/cap2-lex-aime.png	figuras/cap.2/lexicometria/etapa3_aime_freq_e_densidade.png
+figuras/cap2/cap2-lex-clarifications.png	figuras/cap.2/lexicometria/etapa2_clarifications_freq_e_densidade.png
+figuras/cap2/cap2-lex-comparacao.png	figuras/cap.2/lexicometria/etapa1_passo4_comparacao_frequencias_tres_obras.png
+figuras/cap2/cap2-lex-lab-life.png	figuras/cap.2/lexicometria/etapa1_lab_life_freq_e_densidade.png
+figuras/cap2/cap2-lex-pandora.png	figuras/cap.2/lexicometria/etapa1_pandora_freq_e_densidade.png
+figuras/cap2/cap2-lex-recalling.png	figuras/cap.2/lexicometria/etapa2bis_recalling_integral_freq_e_densidade.png
+figuras/cap2/cap2-lex-science-in-action.png	figuras/cap.2/lexicometria/etapa1_sia_freq_e_densidade.png
+figuras/cap2/cap2-mediacao-diferencial.png	figuras/cap.2/diagramas/mediacaodiferencial_ia_mediacao.png
+figuras/cap3/cap3-biblio-1-ranking.png	figuras/cap.3/biblimetria-c4ai/1_ranking_grupos.png
+figuras/cap3/cap3-biblio-3-evolucao.png	figuras/cap.3/biblimetria-c4ai/3_evolucao_temporal_geral.png
+figuras/cap3/cap3-biblio-4-heatmap.png	figuras/cap.3/biblimetria-c4ai/4_heatmap_grupo_ano.png
+figuras/cap3/cap3-biblio-6-produtividade.png	figuras/cap.3/biblimetria-c4ai/6_produtividade_grupos.png
+figuras/cap3/cap3-biblio-8-composicao.png	figuras/cap.3/biblimetria-c4ai/8_composicao_temporal.png
+figuras/cap3/cap3-biblio-9-concentracao.png	figuras/cap.3/biblimetria-c4ai/9_analise_concentracao.png
+figuras/cap4-argumento.png	figuras/cap.4/argumento-capitulo4-*.png
+figuras/juki_1.jpg	figuras/cap.4/covid/juki_1.jpg
+figuras/novel-coronavirus-sars-cov-2_49531042907_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49531042907_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49534865371_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49534865371_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49557550706_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49557550706_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49557550751_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49557550751_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49597020853_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49597020853_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49597519106_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49597519106_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49641177636_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49641177636_o.jpg
+figuras/novel-coronavirus-sars-cov-2_49641177821_o.jpg	figuras/cap.4/covid/novel-coronavirus-sars-cov-2_49641177821_o.jpg
+figuras/pipeline-voz-espectograma-2026-03-18-214305.png	figuras/cap.4/diagramas-mermaid/pipeline-voz-espectograma-*.png
+figuras/pipeline-voz-espectograma-2026-03-18-214902.png	figuras/cap.4/pipeline-voz-espectograma-*.png
+figuras/quadro-analitico-capitulo4-2026-04-15-202321.png	figuras/cap.4/quadro-analitico-capitulo4-*.png
+figuras/rede-sociotecnica-spira-2026-03-11-125858.png	figuras/cap.4/diagramas-mermaid/rede-sociotecnica-spira-capitulo4-*.png
+figuras/rede-sociotecnica-spira-capitulo4-2026-04-15-202334.png	figuras/cap.4/diagramas-mermaid/rede-sociotecnica-spira-capitulo4-*.png
+figuras/roadmap-genealogia-ibm.png	figuras/cap.4/roadmap-genealogia-ibm-capitulo3-*.png
+figuras/spira-roadmap-english-2026-04-15-204011.png	figuras/cap.4/diagramas-mermaid/roadmap-spira-capitulo4-*.png
+figuras/spira_cnn_diagrama_real.png	figuras/cap.4/imagem-voz/spira_cnn_diagrama_real.png
+figuras/spira_comparacao_linear_log.png	figuras/cap.4/imagem-voz/spira_comparacao_linear_log.png
+figuras/spira_espectrograma_com_eixos.png	figuras/cap.4/imagem-voz/spira_espectrograma_com_eixos.png
+figuras/spira_espectrograma_sem_legenda.png	figuras/cap.4/imagem-voz/spira_espectrograma_sem_legenda.png
+figuras/spira_paciente_com_eixos.png	figuras/cap.4/imagem-voz/spira_paciente_com_eixos.png
+figuras/spira_waveform_controle.png	figuras/cap.4/imagem-voz/spira_waveform_controle.png
+figuras/spira_waveform_paciente.png	figuras/cap.4/imagem-voz/spira_waveform_paciente.png
+figuras/younesi2024_fig7_filtro_deslizante.png	figuras/cap.4/younesi2024_fig7_filtro_deslizante.png
