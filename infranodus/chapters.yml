@@ -1,0 +1,34 @@
+# Manifesto de capítulos a serem analisados.
+#
+# Cada entrada gera um conjunto de outputs em infranodus/<slug>/.
+# A análise do capítulo 1 (slug=cap1) tem caminho legado: seus arquivos
+# ficam em infranodus/ direto, sem subpasta, para preservar a história.
+#
+# Campos:
+#   source: caminho do .tex relativo ao repositório do texto (etnografia).
+#           Quando rodado via GitHub Action, o repo .tex é montado em _tex/.
+#           Quando rodado localmente: ajuste a flag --source-root do run_all.py.
+#   slug:   identificador curto, usado como prefixo de arquivo (cap1, cap2, ...).
+#   title:  rótulo legível para os títulos das figuras.
+#   enabled: defina como false para pular um capítulo sem removê-lo.
+
+chapters:
+  - source: ex_cap1.tex
+    slug: cap1
+    title: "Capítulo 1"
+    enabled: true
+
+  - source: ex_cap2.tex
+    slug: cap2
+    title: "Capítulo 2"
+    enabled: true
+
+  - source: ex_cap3.tex
+    slug: cap3
+    title: "Capítulo 3"
+    enabled: true
+
+  - source: ex_cap4.tex
+    slug: cap4
+    title: "Capítulo 4"
+    enabled: true
