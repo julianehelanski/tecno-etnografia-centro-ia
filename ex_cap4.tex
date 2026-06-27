@@ -3,7 +3,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=1.0\textwidth]{figuras/cap.4/imagem-voz/Spira_paciente_sem_legenda.png}
+  \includegraphics[width=1.0\textwidth]{figuras/cap.4/imagem-voz/spira_paciente_sem_legenda.png}
   \caption[Espectrograma do arquivo \texttt{PTT-20200511-WA0018.wav}: paciente no \textit{Covideiro}, 11~mai.~2020.]{Espectrograma do arquivo \texttt{PTT-20200511-WA0018.wav}, gravação de voz enviada por \texttt{WhatsApp} em 11 de maio de 2020 por paciente hospitalizado no \textit{Covideiro}. O arquivo integra o \href{https://drive.google.com/file/d/1Bv0d3uwBB-52MBmtN2A_qNoaBIxUkN9y/view?usp=sharing}{banco de dados público de treinamento do Spira} (CC BY-SA 4.0). O paciente foi instruído a dizer: \textit{O amor ao próximo ajuda a enfrentar o coronavírus com a força que a gente precisa.}}
   \label{fig:abertura-espectrograma-paciente}
 \end{figure}
@@ -591,7 +591,7 @@ plt.savefig("Spira_waveform_controle.png",
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_waveform_controle.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_waveform_controle.png}
   \caption[Forma de onda (\textit{waveform}): voluntário saudável, dataset Spira (CC~BY-SA~4.0).]{Forma de onda (\textit{waveform}) gerada a partir de uma gravação do grupo controle do dataset público do Spira (CC~BY-SA~4.0). Voluntário saudável recitando a frase ``O amor ao próximo ajuda a enfrentar o coronavírus com a força que a gente precisa'', coletada via interface web entre maio e julho de 2020. Eixo horizontal: tempo. Eixo vertical: amplitude (variação de pressão do ar). 16.000 amostras por segundo, antes de qualquer transformação espectral, antes de qualquer diagnóstico. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:waveform-controle}
 \end{figure}
@@ -613,7 +613,7 @@ y_p, sr_p = librosa.load("PTT-20200511-WA0018.wav", sr=SR)
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_waveform_paciente.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_waveform_paciente.png}
   \caption[Forma de onda (\textit{waveform}): paciente hospitalizado, arquivo \texttt{PTT-20200511-WA0018.wav}.]{Forma de onda (\textit{waveform}) gerada a partir do arquivo \texttt{PTT-20200511-WA0018.wav}: paciente hospitalizado com insuficiência reSpiratória confirmada por oxímetro, recitando a mesma frase, coletada em enfermaria de Covid-19 em 11 de maio de 2020 via \texttt{WhatsApp}. Compare com a Figura~\ref{fig:waveform-controle}: a mesma frase, os mesmos parâmetros, dois corpos. Eixo horizontal: tempo. Eixo vertical: amplitude. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:waveform-paciente}
 \end{figure}
@@ -669,7 +669,7 @@ plt.savefig("Spira_espectrograma_sem_legenda.png",
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_espectrograma_sem_legenda.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_espectrograma_sem_legenda.png}
   \caption[Espectrograma mel gerado a partir de uma gravação do grupo controle do dataset público do Spira (CC~BY-SA~4.0).]{Espectrograma mel gerado a partir de uma gravação do grupo controle do dataset público do Spira (CC~BY-SA~4.0). A gravação é de um voluntário recitando a frase ``O amor ao próximo ajuda a enfrentar o coronavírus com a força que a gente precisa'', coletada via interface web entre maio e julho de 2020. A ausência de eixos reproduz o modo como o objeto se apresentou antes da nomeação analítica: uma textura espectral com 128 coeficientes organizados ao longo do tempo. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:espectrograma-sem-legenda}
 \end{figure}
@@ -693,7 +693,7 @@ plt.savefig("Spira_espectrograma_com_eixos.png",
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_espectrograma_com_eixos.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_espectrograma_com_eixos.png}
   \caption[Espectrograma mel com eixos nomeados: voluntário saudável.]{Espectrograma mel com eixos nomeados: voluntário saudável. Eixo horizontal: tempo (s). Eixo vertical: frequência na escala Mel (logarítmica). Intensidade codificada em gradiente de cor (dB, escala logarítmica da amplitude): cores mais claras indicam maior energia naquela faixa de frequência naquele instante. 128 coeficientes, taxa de amostragem de 16~kHz. A figura torna visível a operação que a cadeia de referência circulante realiza sobre o sinal acústico: o que era voz torna-se textura bidimensional em espaço de coordenadas padronizadas. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}. Dataset Spira, licença CC~BY-SA~4.0.\protect\footnote{O \textit{dataset} público do Spira está disponível em: \url{https://github.com/Spira-Covid19/Spira-ACL2021}. Acesso em: 11 mar. 2026. A organização geral do projeto mantém o repositório disponível em: \url{https://github.com/Spirabr}. Acesso em: 11 mar. 2026. As figuras desta seção foram geradas a partir de gravações do dataset público do Spira em sessão de trabalho de 12 de março de 2026. O código \texttt{Python} utilizado está documentado na seção~\ref{sec:nota-llm}.}}
   \label{fig:espectrograma-com-eixos}
 \end{figure}
@@ -713,14 +713,14 @@ S_dB_p = librosa.power_to_db(S_p, ref=np.max)
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_paciente_com_eixos.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_paciente_com_eixos.png}
   \caption[Espectrograma mel com eixos nomeados: paciente hospitalizado com insuficiência reSpiratória.]{Espectrograma mel com eixos nomeados: paciente hospitalizado com insuficiência reSpiratória. A mesma frase, os mesmos parâmetros de processamento, dois corpos, duas texturas. As pausas longas (bandas escuras verticais), a irregularidade das frequências baixas, o ruído espalhado pelas frequências altas: o que o algoritmo aprende a reconhecer como insuficiência reSpiratória. Dataset Spira, licença CC~BY-SA~4.0. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:paciente-com-eixos}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/Spira_paciente_sem_legenda.png}
+  \includegraphics[width=0.8\textwidth]{figuras/cap.4/imagem-voz/spira_paciente_sem_legenda.png}
   \caption[Imagem fantasma: espectrograma mel do arquivo \texttt{PTT-20200511-WA0018.wav}, paciente com IR.]{Imagem fantasma: espectrograma mel gerado a partir do arquivo \texttt{PTT-20200511-WA0018.wav}, paciente hospitalizado com insuficiência reSpiratória, recitando a mesma frase da Figura~\ref{fig:espectrograma-sem-legenda}. Sem eixos, sem escala, sem diagnóstico: a textura espectral antes de qualquer nomeação analítica. O termo \textit{espectro} carrega os dois sentidos que o objeto performa: distribuição de frequências no sentido físico, e rastro de uma presença que a cadeia de inscrições tornou anônima e portátil. A voz que gerou esta grade foi coletada em enfermaria de Covid-19 em 11 de maio de 2020. O corpo que a produziu já não está mais no Covideiro. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:paciente-sem-legenda}
 \end{figure}
@@ -731,7 +731,7 @@ Depois de percorrida a cadeia, é possível formular a questão que ela deixa em
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=1.0\textwidth]{figuras/cap.4/imagem-voz/Spira_comparacao_linear_log.png}
+  \includegraphics[width=1.0\textwidth]{figuras/cap.4/imagem-voz/spira_comparacao_linear_log.png}
   \caption[Comparação entre espectrograma mel em escala linear e logarítmica, dataset Spira.]{Comparação entre o espectrograma mel em escala linear (potência bruta, painel esquerdo) e em escala logarítmica (decibéis, padrão Spira, painel direito), gerados a partir do mesmo arquivo \texttt{PTT-20200511-WA0018.wav}: paciente hospitalizado com insuficiência reSpiratória, coletado via \texttt{WhatsApp} em 11 de maio de 2020. Na escala linear, a energia das frequências baixas domina a escala de cor e apaga as variações nas frequências médias e altas. Na escala logarítmica, as diferenças diagnosticamente relevantes tornam-se visíveis. A conversão para decibéis produz um objeto com propriedades que o objeto linear não possuía, inscrevendo no dispositivo uma teoria sobre o que o sistema auditivo humano pondera como diferença de intensidade e entregando ao algoritmo a mesma grade sobre a qual os 80 milhões de parâmetros da CNN14 foram ajustados no AudioSet. Dataset Spira, licença CC~BY-SA~4.0. Elaboração própria a partir de \parencite{Casanova2021DeepLearning}.}
   \label{fig:comparacao-linear-log}
 \end{figure}
