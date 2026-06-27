@@ -40,37 +40,54 @@
 % Pré-textual: Sem numeração romana. Começa totalmente limpo (empty),
 % sem imprimir absolutamente nada nos cabeçalhos ou rodapés.
 \pagestyle{empty}
-% Desliga as âncoras de página do hyperref no pré-textual. Como aqui o contador
-% ainda está em arábico (1, 2, 3...) e o corpo recomeça em 1, sem isto haveria
-% âncoras duplicadas (page.1, page.2...) e os links "Citado na p." voltariam
-% para a página errada. São religadas na Apresentação (ver abaixo).
 \hypersetup{pageanchor=false}
 
+% Força que qualquer abertura de capítulo/página gerada por pacotes herde o estilo 'empty' no pré-textual
+\assignpagestyle{\chapter}{empty} 
+
+%%% ==================== BLOCO ISOLADO (SEM NÚMEROS) ====================
+
 %%% CAPA
+\thispagestyle{empty}
 \input{capa}
+\thispagestyle{empty}
 \clearpage
 
 %%% FOLHA DE ROSTO
+\thispagestyle{empty}
 \input{folha-de-rosto}
+\thispagestyle{empty}
 \clearpage
 
-%%% FICHA CATALOGRÁFICA
+%%% FICHA CATALOGRÁFICA (Se for descomentar, a trava já está aplicada no pagecommand)
+%\thispagestyle{empty}
 %\includepdf[pagecommand={\thispagestyle{empty}}]{ficha-catalografica}
+%\clearpage
 
-%%% FOLHA DE APROVAÇÃO
+%%% FOLHA DE APROVAÇÃO (Se for descomentar, a trava já está aplicada no pagecommand)
+%\thispagestyle{empty}
 %\includepdf[pagecommand={\thispagestyle{empty}}]{folha-de-aprovacao}
+%\clearpage
 
 %%% DEDICATÓRIA
+\thispagestyle{empty}
 \input{dedicatoria}
+\thispagestyle{empty}
 \clearpage
 
 %%% AGRADECIMENTOS
+\thispagestyle{empty}
 \input{agradecimentos}
+\thispagestyle{empty}
 \clearpage
 
 %%% EPÍGRAFE
+\thispagestyle{empty}
 \input{epigrafe}
+\thispagestyle{empty}
 \clearpage
+
+%%% ==================== FIM DO BLOCO ISOLADO ====================
 
 %%% RESUMO
 \chapter*{}
@@ -111,15 +128,10 @@
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% CORPO %%%%%%%%%%%%%%%%%%%%%%%%%%
-% Remove qualquer resíduo das páginas anteriores, ativa a numeração arábica 
-% iniciando obrigatoriamente na página 1 (física e lógica) e habilita seu 
-% estilo de cabeçalho (fancy) definido no preâmbulo.
 \clearpage
+\assignpagestyle{\chapter}{plain} % Devolve o comportamento normal para os capítulos textuais
 \pagenumbering{arabic}
-\setcounter{page}{1}
-\hypersetup{pageanchor=true} % Religa as âncoras de página: a partir daqui
-                             % page.1, page.2... são únicas e os links "Citado
-                             % na p." passam a voltar para a página correta.
+\hypersetup{pageanchor=true} 
 \pagestyle{fancy}
 
 \input{ex_cap0}   % Apresentação / Introdução (Será a página 1 oficial)

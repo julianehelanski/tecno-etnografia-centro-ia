@@ -224,14 +224,17 @@
 % CONFIGURAÇÃO AUTOMÁTICA DE INÍCIO DO DOCUMENTO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \AtBeginDocument{
-  % Define que o documento começa sem cabeçalhos/números de página (Capa, Sumário, etc.)
+  % Desativa cabeçalhos/rodapés nas páginas pré-textuais
   \pagestyle{empty}
+  % DESATIVA as âncoras de página para evitar duplicatas e corrigir os links da bibliografia
+  \hypersetup{pageanchor=false}
 }
 
-% Comando customizado para você colocar exatamente onde começa a Apresentação
+% Comando customizado para colocar exatamente no início da Apresentação (Cap. 0)
 \newcommand{\iniciarParteTextual}{%
   \clearpage
+  % REATIVA as âncoras do hyperref ANTES de reiniciar a paginação
+  \hypersetup{pageanchor=true}
   \pagestyle{fancy}           % Ativa o cabeçalho configurado (número no canto direito)
-  \pagenumbering{arabic}      % Transforma a numeração em arábica (1, 2, 3...)
-  \setcounter{page}{1}        % Reseta o contador para começar na página 1
+  \pagenumbering{arabic}      % Transforma a numeração em arábica e reseta automaticamente para 1
 }
