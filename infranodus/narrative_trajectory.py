@@ -29,6 +29,7 @@ CLI:
 from __future__ import annotations
 
 import argparse
+import math
 import re
 import sys
 from collections import Counter
@@ -232,8 +233,86 @@ def render_alluvial(paras: list[str], para_tokens: list[list[str]],
 # 4. Semantic trajectory (paragraph embeddings → PCA 2D)
 # ---------------------------------------------------------------------------
 
+def _dodge_labels(fig, ax, texts, anchors, *, pad_px: float = 3.0,
+                  anchor_pad_px: float = 11.0, iterations: int = 800,
+                  connector_color: str = "#94a3b8") -> None:
+    """Separa rótulos sobrepostos por repulsão iterativa em coordenadas de tela.
+
+    Substitui o deslocamento fixo (`xytext` alternado) que empilhava os
+    rótulos quando vários momentos caíam na mesma região da projeção. Lê a
+    caixa real de cada texto a partir do renderer, empurra pares que se
+    sobrepõem ao longo do eixo de menor penetração e afasta cada rótulo da
+    própria bolinha-âncora; ao final desenha um conector fino do rótulo ao
+    ponto. É determinístico (sem aleatoriedade), coerente com a política de
+    seeds fixas do projeto.
+
+    Deve ser chamado depois de ``fig.tight_layout()`` e antes de ``savefig``,
+    para que as caixas medidas correspondam ao layout final salvo.
+    """
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    anchors_disp = ax.transData.transform(np.asarray(anchors, dtype=float))
+
+    n = len(texts)
+    centers = np.zeros((n, 2))
+    sizes = np.zeros((n, 2))
+    for i, t in enumerate(texts):
+        bb = t.get_window_extent(renderer=renderer)
+        centers[i] = [(bb.x0 + bb.x1) / 2.0, (bb.y0 + bb.y1) / 2.0]
+        sizes[i] = [bb.width, bb.height]
+
+    for _ in range(iterations):
+        moved = False
+        # 1) repulsão entre caixas de rótulos sobrepostas
+        for i in range(n):
+            for j in range(i + 1, n):
+                dx = centers[i, 0] - centers[j, 0]
+                dy = centers[i, 1] - centers[j, 1]
+                ox = (sizes[i, 0] + sizes[j, 0]) / 2.0 + pad_px - abs(dx)
+                oy = (sizes[i, 1] + sizes[j, 1]) / 2.0 + pad_px - abs(dy)
+                if ox > 0 and oy > 0:
+                    moved = True
+                    if ox <= oy:
+                        s = ox / 2.0 * (1.0 if dx >= 0 else -1.0)
+                        centers[i, 0] += s
+                        centers[j, 0] -= s
+                    else:
+                        s = oy / 2.0 * (1.0 if dy >= 0 else -1.0)
+                        centers[i, 1] += s
+                        centers[j, 1] -= s
+        # 2) afasta cada rótulo da própria âncora para não cobrir a bolinha
+        for i in range(n):
+            dx = centers[i, 0] - anchors_disp[i, 0]
+            dy = centers[i, 1] - anchors_disp[i, 1]
+            dist = math.hypot(dx, dy)
+            need = anchor_pad_px + sizes[i, 1] / 2.0
+            if dist < need:
+                if dist < 1e-6:
+                    dx, dy, dist = 0.0, 1.0, 1.0
+                push = need - dist
+                centers[i, 0] += dx / dist * push
+                centers[i, 1] += dy / dist * push
+                moved = True
+        if not moved:
+            break
+
+    inv = ax.transData.inverted()
+    new_pos = inv.transform(centers)
+    anchors_data = np.asarray(anchors, dtype=float)
+    for i, t in enumerate(texts):
+        t.set_position((new_pos[i, 0], new_pos[i, 1]))
+        t.set_ha("center")
+        t.set_va("center")
+        ax.annotate("", xy=(anchors_data[i, 0], anchors_data[i, 1]),
+                    xytext=(new_pos[i, 0], new_pos[i, 1]),
+                    xycoords="data", textcoords="data",
+                    arrowprops=dict(arrowstyle="-", color=connector_color,
+                                    lw=0.6, alpha=0.8), zorder=4)
+
+
 def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
-                                 path: Path, title: str, group_size: int = 5):
+                                 path: Path, title: str, group_size: int | None = None,
+                                 target_moments: int = 22):
     """Embed groups of paragraphs ("moments") and project to 2D.
 
     Tries the multilingual sentence-transformer first; if the model can't
@@ -245,13 +324,19 @@ def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
     Paragraphs are grouped into windows of `group_size` to produce a
     smoother trajectory; per-paragraph embeddings of a long chapter tend
     to live in a noisy high-dimensional space whose 2D projection is
-    visually overcrowded.
+    visually overcrowded. To keep the labels legible, `group_size` is
+    chosen adaptively so the chapter yields ~`target_moments` moments, and
+    the moment labels are de-collided with the built-in `_dodge_labels`
+    (deterministic, no external dependency).
     """
     from sklearn.decomposition import PCA, TruncatedSVD
     from sklearn.feature_extraction.text import TfidfVectorizer
 
-    # Group paragraphs into moments
+    # Group paragraphs into moments. Adaptive window: aim for ~target_moments
+    # so the 2D plot does not overcrowd with overlapping labels.
     n_paras = len(paras)
+    if group_size is None:
+        group_size = max(5, math.ceil(n_paras / max(1, target_moments)))
     moments_text: list[str] = []
     moments_tokens: list[list[str]] = []
     moments_bounds: list[tuple[int, int]] = []
@@ -307,17 +392,29 @@ def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
     ax.scatter(coords[:, 0], coords[:, 1], s=140, c=colors,
                 edgecolor="#1a1d22", linewidth=0.6, zorder=3)
 
-    # Label every moment with its dominant term
+    # Label every moment with its dominant term. The de-collision happens
+    # later (after tight_layout, via `_dodge_labels`) so the boxes are
+    # separated against the final saved layout.
+    labels = []
     for i, (s, e) in enumerate(moments_bounds):
         c = Counter(moments_tokens[i])
         top_term = c.most_common(1)[0][0] if c else "—"
-        dx, dy = (10, 10) if i % 2 == 0 else (10, -16)
-        ax.annotate(f"¶{s+1}–{e} · {top_term}", coords[i],
-                     xytext=(dx, dy), textcoords="offset points",
+        labels.append(f"¶{s+1}–{e} · {top_term}")
+
+    texts = [ax.text(coords[i, 0], coords[i, 1], lab,
                      fontsize=8.5, color="#0e1116", fontweight="bold",
-                     bbox=dict(boxstyle="round,pad=0.22",
-                                facecolor="white", edgecolor="#cbd5e1",
-                                linewidth=0.6, alpha=0.92))
+                     ha="center", va="center", zorder=5,
+                     bbox=dict(boxstyle="round,pad=0.22", facecolor="white",
+                               edgecolor="#cbd5e1", linewidth=0.6, alpha=0.92))
+             for i, lab in enumerate(labels)]
+
+    # Give the labels room to spread without being clipped by the axes.
+    span_x = float(coords[:, 0].max() - coords[:, 0].min()) or 1.0
+    span_y = float(coords[:, 1].max() - coords[:, 1].min()) or 1.0
+    ax.set_xlim(coords[:, 0].min() - 0.22 * span_x,
+                coords[:, 0].max() + 0.22 * span_x)
+    ax.set_ylim(coords[:, 1].min() - 0.22 * span_y,
+                coords[:, 1].max() + 0.22 * span_y)
 
     # Start / end markers
     ax.scatter(*coords[0], s=460, marker="*", color="#10b981",
@@ -337,6 +434,9 @@ def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
     ax.legend(loc="best", frameon=True, framealpha=0.9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
+    # De-collide the moment labels against the final layout so they no longer
+    # overlap (replaces the old fixed-offset placement).
+    _dodge_labels(fig, ax, texts, coords)
     fig.savefig(path, dpi=160, facecolor="#ffffff")
     plt.close(fig)
 
