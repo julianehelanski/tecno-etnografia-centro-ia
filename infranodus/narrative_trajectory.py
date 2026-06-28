@@ -234,36 +234,56 @@ def render_alluvial(paras: list[str], para_tokens: list[list[str]],
 # ---------------------------------------------------------------------------
 
 def _dodge_labels(fig, ax, texts, anchors, *, pad_px: float = 3.0,
-                  anchor_pad_px: float = 11.0, iterations: int = 800,
+                  anchor_pad_px: float = 12.0, point_pad_px: float = 7.0,
+                  special_pad_px: float = 22.0, special_idx=(),
+                  obstacle_pad_px: float = 6.0, obstacles=None,
+                  iterations: int = 1400,
                   connector_color: str = "#94a3b8") -> None:
     """Separa rótulos sobrepostos por repulsão iterativa em coordenadas de tela.
 
-    Substitui o deslocamento fixo (`xytext` alternado) que empilhava os
-    rótulos quando vários momentos caíam na mesma região da projeção. Lê a
-    caixa real de cada texto a partir do renderer, empurra pares que se
-    sobrepõem ao longo do eixo de menor penetração e afasta cada rótulo da
-    própria bolinha-âncora; ao final desenha um conector fino do rótulo ao
-    ponto. É determinístico (sem aleatoriedade), coerente com a política de
-    seeds fixas do projeto.
+    Substitui o deslocamento fixo (`xytext` alternado) que empilhava os rótulos
+    quando vários momentos caíam na mesma região da projeção. Lê a CAIXA visível
+    de cada rótulo (o patch do bbox arredondado, maior que o texto) e empurra,
+    por repulsão iterativa ao longo do eixo de menor penetração: (1) rótulos que
+    se sobrepõem entre si; (2) cada rótulo para fora de todas as bolinhas-âncora,
+    com folga maior nos marcadores especiais ``special_idx`` (estrela de início e
+    X de fim) para que fiquem sempre visíveis; (3) rótulos para fora de obstáculos
+    como a caixa de legenda. Ao final desenha um conector fino do rótulo ao ponto.
+    É determinístico (sem aleatoriedade), coerente com a política de seeds fixas.
 
     Deve ser chamado depois de ``fig.tight_layout()`` e antes de ``savefig``,
     para que as caixas medidas correspondam ao layout final salvo.
     """
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()
-    anchors_disp = ax.transData.transform(np.asarray(anchors, dtype=float))
+    pts = ax.transData.transform(np.asarray(anchors, dtype=float))
 
     n = len(texts)
+    m = len(pts)
     centers = np.zeros((n, 2))
     sizes = np.zeros((n, 2))
     for i, t in enumerate(texts):
-        bb = t.get_window_extent(renderer=renderer)
+        # Medir a CAIXA visível (patch do bbox arredondado), não só o texto:
+        # o patch é maior que o texto pela folga do boxstyle, e era por isso
+        # que rótulos "separados" ainda tinham as caixas brancas sobrepostas.
+        patch = t.get_bbox_patch()
+        bb = (patch.get_window_extent(renderer)
+              if patch is not None else t.get_window_extent(renderer=renderer))
         centers[i] = [(bb.x0 + bb.x1) / 2.0, (bb.y0 + bb.y1) / 2.0]
         sizes[i] = [bb.width, bb.height]
 
-    for _ in range(iterations):
+    special = set(special_idx)
+    obstacle_boxes = []
+    for ob in (obstacles or []):
+        try:
+            obstacle_boxes.append(ob.get_window_extent(renderer=renderer))
+        except Exception:
+            pass
+
+    def separate_labels() -> bool:
+        """Empurra pares de rótulos sobrepostos (caixas visíveis) ao longo do
+        eixo de menor penetração. É a restrição prioritária."""
         moved = False
-        # 1) repulsão entre caixas de rótulos sobrepostas
         for i in range(n):
             for j in range(i + 1, n):
                 dx = centers[i, 0] - centers[j, 0]
@@ -280,19 +300,69 @@ def _dodge_labels(fig, ax, texts, anchors, *, pad_px: float = 3.0,
                         s = oy / 2.0 * (1.0 if dy >= 0 else -1.0)
                         centers[i, 1] += s
                         centers[j, 1] -= s
-        # 2) afasta cada rótulo da própria âncora para não cobrir a bolinha
+        return moved
+
+    def repel_points() -> bool:
+        """Afasta cada rótulo de TODAS as bolinhas (mantém marcadores à vista);
+        folga maior na própria âncora e maior ainda em início/fim."""
+        moved = False
         for i in range(n):
-            dx = centers[i, 0] - anchors_disp[i, 0]
-            dy = centers[i, 1] - anchors_disp[i, 1]
-            dist = math.hypot(dx, dy)
-            need = anchor_pad_px + sizes[i, 1] / 2.0
-            if dist < need:
-                if dist < 1e-6:
-                    dx, dy, dist = 0.0, 1.0, 1.0
-                push = need - dist
-                centers[i, 0] += dx / dist * push
-                centers[i, 1] += dy / dist * push
-                moved = True
+            for p in range(m):
+                if p == i:
+                    pad = anchor_pad_px
+                elif p in special:
+                    pad = special_pad_px
+                else:
+                    pad = point_pad_px
+                dx = centers[i, 0] - pts[p, 0]
+                dy = centers[i, 1] - pts[p, 1]
+                ox = sizes[i, 0] / 2.0 + pad - abs(dx)
+                oy = sizes[i, 1] / 2.0 + pad - abs(dy)
+                if ox > 0 and oy > 0:
+                    moved = True
+                    if ox <= oy:
+                        centers[i, 0] += ox * (1.0 if dx >= 0 else -1.0)
+                    else:
+                        centers[i, 1] += oy * (1.0 if dy >= 0 else -1.0)
+        return moved
+
+    def repel_obstacles() -> bool:
+        """Afasta rótulos de obstáculos (ex.: caixa de legenda)."""
+        moved = False
+        for i in range(n):
+            for bb in obstacle_boxes:
+                lx0 = centers[i, 0] - sizes[i, 0] / 2.0 - obstacle_pad_px
+                lx1 = centers[i, 0] + sizes[i, 0] / 2.0 + obstacle_pad_px
+                ly0 = centers[i, 1] - sizes[i, 1] / 2.0 - obstacle_pad_px
+                ly1 = centers[i, 1] + sizes[i, 1] / 2.0 + obstacle_pad_px
+                ox = min(lx1, bb.x1) - max(lx0, bb.x0)
+                oy = min(ly1, bb.y1) - max(ly0, bb.y0)
+                if ox > 0 and oy > 0:
+                    moved = True
+                    cx = (bb.x0 + bb.x1) / 2.0
+                    cy = (bb.y0 + bb.y1) / 2.0
+                    if ox <= oy:
+                        centers[i, 0] += ox * (1.0 if centers[i, 0] >= cx else -1.0)
+                    else:
+                        centers[i, 1] += oy * (1.0 if centers[i, 1] >= cy else -1.0)
+        return moved
+
+    # Fase 1: todas as restrições. A separação rótulo-rótulo vem por último
+    # para que o estado de saída tenda a não ter sobreposição entre rótulos.
+    for _ in range(iterations):
+        moved = repel_points()
+        moved = repel_obstacles() or moved
+        moved = separate_labels() or moved
+        if not moved:
+            break
+
+    # Fase 2: limpeza dedicada. Sem a repulsão dos pontos (que poderia reabrir
+    # colisões), garante zero sobreposição entre rótulos e fora da legenda. Os
+    # marcadores de início/fim seguem visíveis pelo zorder, mesmo se um rótulo
+    # encostar numa bolinha comum.
+    for _ in range(800):
+        moved = repel_obstacles()
+        moved = separate_labels() or moved
         if not moved:
             break
 
@@ -416,12 +486,13 @@ def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
     ax.set_ylim(coords[:, 1].min() - 0.22 * span_y,
                 coords[:, 1].max() + 0.22 * span_y)
 
-    # Start / end markers
-    ax.scatter(*coords[0], s=460, marker="*", color="#10b981",
-                edgecolor="#0e1116", linewidth=1.5, zorder=4,
+    # Start / end markers. zorder acima dos rótulos (5) para que a estrela de
+    # início e o X de fim fiquem sempre visíveis, mesmo em regiões adensadas.
+    ax.scatter(*coords[0], s=520, marker="*", color="#10b981",
+                edgecolor="#ffffff", linewidth=1.6, zorder=6,
                 label=f"início · ¶1–{moments_bounds[0][1]}")
-    ax.scatter(*coords[-1], s=320, marker="X", color="#ef4444",
-                edgecolor="#0e1116", linewidth=1.5, zorder=4,
+    ax.scatter(*coords[-1], s=340, marker="X", color="#ef4444",
+                edgecolor="#ffffff", linewidth=1.6, zorder=6,
                 label=f"fim · ¶{moments_bounds[-1][0]+1}–{moments_bounds[-1][1]}")
 
     ax.set_xlabel(f"PC1 ({var1:.1f}% da variância)", fontsize=11, color="#0e1116")
@@ -431,12 +502,14 @@ def render_semantic_trajectory(paras: list[str], para_tokens: list[list[str]],
         f"(embeddings: {method} · projeção PCA 2D · cor = ordem de leitura)",
         fontsize=12, color="#0e1116", pad=12,
     )
-    ax.legend(loc="best", frameon=True, framealpha=0.9)
+    legend = ax.legend(loc="best", frameon=True, framealpha=0.9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
-    # De-collide the moment labels against the final layout so they no longer
-    # overlap (replaces the old fixed-offset placement).
-    _dodge_labels(fig, ax, texts, coords)
+    # De-collide the moment labels against the final layout: keep them off each
+    # other, off every marker (with extra room around the start/end markers) and
+    # out of the legend box.
+    _dodge_labels(fig, ax, texts, coords, special_idx=(0, n - 1),
+                  obstacles=[legend])
     fig.savefig(path, dpi=160, facecolor="#ffffff")
     plt.close(fig)
 
