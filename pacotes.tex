@@ -1,6 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pacotes básicos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+\newunicodechar{ẽ}{\~e}
 \usepackage[brazilian,english]{babel}
 \usepackage{csquotes}
 \usepackage[top=3cm,bottom=2cm,right=2cm,left=3cm]{geometry}
@@ -8,11 +10,13 @@
 
 \usepackage{wasysym}
 \usepackage{newunicodechar}
+\usepackage{listings}
 \newunicodechar{☺}{\smiley}
 \usepackage{siunitx}
 
 % --- preâmbulo (uma vez) ---
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage{fontawesome5}   % ícone \faYoutube
@@ -125,23 +129,23 @@
 \floatname{algorithm}{Algoritmo}
 \renewcommand{\listalgorithmname}{Lista de Algoritmos}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Código %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\tcbuselibrary{skins,breakable,listings}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Código 
 \newtcblisting{codigo}[1][]{%
   listing only,
+  listing engine=listings,
   listing options={
     language=Python,
-    basicstyle=\normalsize\ttfamily,
+    basicstyle=\ttfamily\small,
     breaklines=true,
-    numbers=none
+    numbers=none,
+    columns=fullflexible,
+    keepspaces=true
   },
   colback=white,
   colframe=white,
   boxrule=0pt,
   left=1.5cm
 }
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Figuras e legendas %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{caption}
 \usepackage{subcaption}
