@@ -800,35 +800,48 @@ A diferença entre as grandes áreas é de volume e de vocabulário. Quando cruz
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figuras/cap.2/capes-scielo/capes_13_heatmap_area_keyword.png}
-    \caption[Co-ocorrência entre termos-chave e grandes áreas, \texttt{Capes} 2021--2024]{%
-        Mapa de calor da co-ocorrência entre dez termos-chave do campo e as nove
-        grandes áreas de conhecimento da \texttt{Capes}, sobre o corpus de 12.995
-        defesas. Cada célula reporta o percentual do termo da linha concentrado
-        naquela grande área, e a contagem absoluta entre parênteses. A leitura
-        por coluna evidencia que termos como \enquote{redes neurais} e
+       \caption[Co-ocorrência entre termos-chave e grandes áreas, \texttt{Capes} 2021--2024]{%
+        Matriz de bolhas da co-ocorrência entre dez termos-chave do campo e as
+        nove grandes áreas de conhecimento da \texttt{Capes}, sobre o corpus de
+        12.995 defesas. Em cada cruzamento, o tamanho e a cor da bolha indicam o
+        percentual do termo da coluna que se concentra naquela grande área, numa
+        escala sequencial branco-verde ancorada no verde Okabe-Ito, em matiz
+        distinto do par azul-vermelho das matrizes de bolhas do
+        capítulo~\ref{capitulo3}, segundo a colorbar à direita da figura. A
+        leitura por coluna evidencia que termos como \enquote{redes neurais} e
         \enquote{aprendizado profundo} concentram-se nas Ciências Exatas e nas
-        Engenharias, ao passo que \enquote{\texttt{ChatGPT}} aparece
-        distribuído por todas as áreas, com presença particular nas Ciências
-        Sociais Aplicadas e nas Ciências Humanas. Elaboração própria a partir do
-        Catálogo de Teses e Dissertações da \texttt{Capes}, \emph{dump} oficial
-        \texttt{BR-CAPES-BTD-2021A2024}. Dados de domínio público. Repositório com dados, \emph{scripts} e figuras em \protect\url{https://github.com/julianehelanski/bibliometria-ia-humanas}.}
+        Engenharias, ao passo que \enquote{\texttt{ChatGPT}} distribui-se por
+        todas as áreas, com presença nas Ciências Sociais Aplicadas e nas
+        Ciências Humanas. Elaboração própria a partir do Catálogo de Teses e
+        Dissertações da \texttt{Capes}, \emph{dump} oficial
+        \texttt{BR-CAPES-BTD-2021A2024}. Dados de domínio público. Repositório
+        com dados, \emph{scripts} e figuras em
+        \protect\url{https://github.com/julianehelanski/bibliometria-ia-humanas}.}
     \label{fig:capes_heatmap_keyword}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figuras/cap.2/capes-scielo/capes_22_heatmap_subcampo_grande_area.png}
-    \caption[Concentração dos subcampos por grande área, \texttt{Capes} 2021--2024]{%
-        Mapa de calor da concentração dos cinco subcampos do classificador entre
-        as nove grandes áreas. Cada linha, que corresponde a um subcampo, está
-        normalizada para somar cem por cento, e mostra, para cada técnica, onde
-        ela se concentra. O aprendizado profundo e as redes neurais concentram-se
-        nas Ciências Exatas e nas Engenharias, e os modelos de linguagem e a
-        inteligência artificial generativa distribuem-se de modo mais espalhado,
-        com presença nas Ciências Sociais Aplicadas, na área Multidisciplinar e
-        nas Ciências Humanas. Elaboração própria a partir do Catálogo de Teses e
-        Dissertações da \texttt{Capes}, \emph{dump} oficial
-        \texttt{BR-CAPES-BTD-2021A2024}. Dados de domínio público. Repositório com dados, \emph{scripts} e figuras em \protect\url{https://github.com/julianehelanski/bibliometria-ia-humanas}.}
+        \caption[Concentração dos subcampos por grande área, \texttt{Capes} 2021--2024]{%
+        Matriz de bolhas da concentração dos cinco subcampos do classificador
+        entre as nove grandes áreas. Cada linha, que corresponde a um subcampo,
+        está normalizada para somar cem por cento, e mostra, para cada técnica,
+        onde ela se concentra. Em cada cruzamento, o tamanho e a cor da bolha
+        indicam o percentual do subcampo distribuído naquela grande área, numa
+        escala sequencial branco-laranja ancorada no laranja Okabe-Ito, em
+        matiz distinto do verde da Figura~\ref{fig:capes_heatmap_keyword} e
+        do par azul-vermelho das matrizes de bolhas do
+        capítulo~\ref{capitulo3}, segundo a colorbar à direita da figura. O
+        aprendizado profundo e as redes neurais concentram-se nas Ciências
+        Exatas e nas Engenharias, e os modelos de linguagem e a inteligência
+        artificial generativa distribuem-se de modo mais espalhado, com
+        presença nas Ciências Sociais Aplicadas, na área Multidisciplinar e
+        nas Ciências Humanas. Elaboração própria a partir do Catálogo de Teses
+        e Dissertações da \texttt{Capes}, \emph{dump} oficial
+        \texttt{BR-CAPES-BTD-2021A2024}. Dados de domínio público. Repositório
+        com dados, \emph{scripts} e figuras em
+        \protect\url{https://github.com/julianehelanski/bibliometria-ia-humanas}.}
     \label{fig:capes_heatmap_subcampo}
 \end{figure}
 
