@@ -559,6 +559,24 @@ def label_topic(community: set[str], deg: dict[str, float], k: int = 4) -> list[
 # 5. Rendering
 # ---------------------------------------------------------------------------
 
+# Curvatura e cor das arestas (mesma lógica da rede interativa do site):
+# arco leve no lugar da linha reta, e cor de cada aresta pela mistura das
+# cores de comunidade das duas pontas (aresta interna a um tópico herda a
+# sua cor; aresta entre tópicos mostra a transição das duas).
+RAD_ARESTA = 0.16
+
+
+def _cor_aresta_mistura(rgba_u, rgba_v):
+    a = np.asarray(rgba_u, dtype=float)
+    b = np.asarray(rgba_v, dtype=float)
+    return tuple((a + b) / 2.0)
+
+
+def _cores_arestas(G: nx.Graph, node_color_map: dict) -> list:
+    return [_cor_aresta_mistura(node_color_map[u], node_color_map[v])
+            for u, v in G.edges()]
+
+
 def render_network(G: nx.Graph, comms: list[set[str]], deg: dict[str, float],
                    path: Path, title: str, label_top: int = 45):
     pos = nx.spring_layout(G, weight="weight", seed=11, k=2.2 / np.sqrt(max(G.number_of_nodes(), 1)),
@@ -568,7 +586,8 @@ def render_network(G: nx.Graph, comms: list[set[str]], deg: dict[str, float],
         for n in c:
             node2comm[n] = i
     palette = plt.cm.tab10(np.linspace(0, 1, max(len(comms), 1)))
-    node_colors = [palette[node2comm.get(n, 0) % len(palette)] for n in G.nodes()]
+    node_color_map = {n: palette[node2comm.get(n, 0) % len(palette)] for n in G.nodes()}
+    node_colors = [node_color_map[n] for n in G.nodes()]
     max_deg = max(deg.values()) or 1
     node_sizes = [80 + 700 * (deg[n] / max_deg) for n in G.nodes()]
 
@@ -582,7 +601,10 @@ def render_network(G: nx.Graph, comms: list[set[str]], deg: dict[str, float],
         ew = 0.15 + 1.6 * (weights / weights.max())
     else:
         ew = []
-    nx.draw_networkx_edges(G, pos, ax=ax, alpha=0.35, width=ew, edge_color="#5a6470")
+    nx.draw_networkx_edges(G, pos, ax=ax, alpha=0.5, width=ew,
+                           edge_color=_cores_arestas(G, node_color_map),
+                           arrows=True, arrowstyle="-",
+                           connectionstyle=f"arc3,rad={RAD_ARESTA}")
     nx.draw_networkx_nodes(G, pos, ax=ax, node_color=node_colors,
                            node_size=node_sizes, linewidths=0.4, edgecolors="#1a1d22")
 
@@ -690,7 +712,8 @@ def render_network_pmi(G: nx.Graph, comms: list[set[str]], pr: dict[str, float],
         for n in c:
             node2comm[n] = i
     palette = plt.cm.tab10(np.linspace(0, 1, max(len(comms), 1)))
-    node_colors = [palette[node2comm.get(n, 0) % len(palette)] for n in H.nodes()]
+    node_color_map = {n: palette[node2comm.get(n, 0) % len(palette)] for n in H.nodes()}
+    node_colors = [node_color_map[n] for n in H.nodes()]
 
     pr_local = {n: pr.get(n, 0.0) for n in H.nodes()}
     max_pr = max(pr_local.values()) or 1.0
@@ -706,7 +729,10 @@ def render_network_pmi(G: nx.Graph, comms: list[set[str]], pr: dict[str, float],
         ew = 0.3 + 1.6 * npmis_n
     else:
         ew = []
-    nx.draw_networkx_edges(H, pos, ax=ax, alpha=0.45, width=ew, edge_color="#5a6470")
+    nx.draw_networkx_edges(H, pos, ax=ax, alpha=0.55, width=ew,
+                           edge_color=_cores_arestas(H, node_color_map),
+                           arrows=True, arrowstyle="-",
+                           connectionstyle=f"arc3,rad={RAD_ARESTA}")
     nx.draw_networkx_nodes(H, pos, ax=ax, node_color=node_colors,
                            node_size=node_sizes, linewidths=0.4, edgecolors="#1a1d22")
 
