@@ -140,6 +140,16 @@ def render_gantt(paras: list[str], para_tokens: list[list[str]],
 
 def render_alluvial(paras: list[str], para_tokens: list[list[str]],
                      path: Path, title: str, K: int = 8, top_per_seg: int = 5):
+    """Fluxo de tópicos por segmento em faixas horizontais fixas por termo.
+
+    Cada termo que entra no top-``top_per_seg`` de algum segmento ganha uma
+    faixa (linha) própria, rotulada uma única vez à esquerda; nos segmentos em
+    que é top, desenha-se um bloco com a sua contagem local, e blocos de
+    segmentos consecutivos são unidos por uma fita contínua da cor do termo.
+    Assim cada termo se lê como um rio horizontal, e a persistência aparece
+    como faixa ininterrupta, em vez dos blocos que trocavam de linha a cada
+    mudança de ranking na versão anterior.
+    """
     n = len(paras)
     bounds = [(round(k * n / K), round((k + 1) * n / K)) for k in range(K)]
 
@@ -149,79 +159,84 @@ def render_alluvial(paras: list[str], para_tokens: list[list[str]],
         seg_counts.append(Counter(toks))
     seg_top = [[w for w, _ in c.most_common(top_per_seg)] for c in seg_counts]
 
-    universe = sorted({c for s in seg_top for c in s})
-    cmap = plt.cm.tab20(np.linspace(0, 1, max(len(universe), 1)))
-    color = {c: cmap[i] for i, c in enumerate(universe)}
+    # Presença de cada termo: em quais segmentos é top-5 e com que contagem.
+    present: dict[str, dict[int, int]] = {}
+    for k, top in enumerate(seg_top):
+        for c in top:
+            present.setdefault(c, {})[k] = seg_counts[k][c]
 
-    fig, ax = plt.subplots(figsize=(20, 10))
+    def first_seg(c: str) -> int:
+        return min(present[c])
+
+    def total(c: str) -> int:
+        return sum(present[c].values())
+
+    # Ordena as faixas pela ordem de entrada na cadeia e, em empate, pelo peso.
+    universe = sorted(present, key=lambda c: (first_seg(c), -total(c)))
+    L = len(universe)
+    cmap = plt.cm.tab20(np.linspace(0, 1, 20))
+    color = {c: cmap[i % 20] for i, c in enumerate(universe)}
+    lane = {c: i for i, c in enumerate(universe)}
+
+    row_h, row_gap = 0.62, 0.5
+    step = row_h + row_gap
+    lane_y = {c: -lane[c] * step for c in universe}
+    col_x = np.arange(K) * 3.0
+    box_w = 1.0
+
+    fig, ax = plt.subplots(figsize=(19, max(7.0, 0.52 * L + 1.5)))
     fig.patch.set_facecolor("#ffffff")
     ax.set_facecolor("#ffffff")
 
-    box_w, box_h, gap = 0.6, 0.85, 0.18
-    col_x = np.arange(K) * 3.4
+    # Fitas de persistência (segmentos consecutivos) — horizontais, na faixa do termo.
+    for c in universe:
+        segs = sorted(present[c])
+        for a, b in zip(segs, segs[1:]):
+            if b == a + 1:
+                x1, x2 = col_x[a] + box_w / 2, col_x[b] - box_w / 2
+                y = lane_y[c]
+                ax.fill_between([x1, x2], y - row_h * 0.42, y + row_h * 0.42,
+                                color=color[c], alpha=0.38, linewidth=0)
 
-    boxes = {}
-    for k, top in enumerate(seg_top):
-        for r, c in enumerate(top):
-            y_top = -r * (box_h + gap)
-            y_bot = y_top - box_h
-            boxes[(k, c)] = (col_x[k], y_top, y_bot)
+    # Blocos por segmento, com a contagem local dentro.
+    for c in universe:
+        y = lane_y[c]
+        for k, cnt in present[c].items():
             ax.add_patch(plt.Rectangle(
-                (col_x[k] - box_w / 2, y_bot), box_w, box_h,
-                facecolor=color[c], edgecolor="#1a1d22", linewidth=0.7,
-            ))
-            ax.text(col_x[k], (y_top + y_bot) / 2, c, ha="center", va="center",
-                    fontsize=9.5, color="#0e1116", fontweight="bold")
+                (col_x[k] - box_w / 2, y - row_h / 2), box_w, row_h,
+                facecolor=color[c], edgecolor="#1a1d22", linewidth=0.6))
+            ax.text(col_x[k], y, str(cnt), ha="center", va="center",
+                    fontsize=8, color="#0e1116")
 
-    # Persistence ribbons between adjacent segments
-    for k in range(K - 1):
-        for c in seg_top[k]:
-            if c not in seg_top[k + 1]:
-                continue
-            x1, y1t, y1b = boxes[(k, c)]
-            x2, y2t, y2b = boxes[(k + 1, c)]
-            left = x1 + box_w / 2
-            right = x2 - box_w / 2
-            mid = (left + right) / 2
-            poly_x = [left, mid, mid, right, right, mid, mid, left]
-            poly_y = [y1t, y1t, y2t, y2t, y2b, y2b, y1b, y1b]
-            ax.fill(poly_x, poly_y, color=color[c], alpha=0.22, linewidth=0)
+    # Rótulo e amostra de cor de cada faixa, à esquerda (uma vez por termo).
+    x_label = col_x[0] - box_w / 2 - 0.35
+    for c in universe:
+        y = lane_y[c]
+        ax.add_patch(plt.Rectangle((x_label - 0.28, y - row_h / 2), 0.24, row_h,
+                                   facecolor=color[c], edgecolor="none"))
+        ax.text(x_label - 0.36, y, c, ha="right", va="center",
+                fontsize=10, color="#0e1116", fontweight="bold")
+        # Marcador de estreia (primeira aparição na cadeia).
+        k0 = first_seg(c)
+        ax.plot([col_x[k0] - box_w / 2 - 0.24, col_x[k0] - box_w / 2], [y, y],
+                color=color[c], lw=2)
+        ax.plot(col_x[k0] - box_w / 2 - 0.24, y, marker=">", markersize=7,
+                color=color[c])
 
-    # Indicate "entrance" (concept appears for first time in a segment) and "exit"
-    seen_so_far: set[str] = set()
-    for k, top in enumerate(seg_top):
-        for c in top:
-            if c in seen_so_far:
-                continue
-            x, yt, yb = boxes[(k, c)]
-            ax.plot([x - box_w / 2 - 0.15, x - box_w / 2],
-                    [(yt + yb) / 2, (yt + yb) / 2],
-                    color=color[c], lw=2)
-            ax.plot(x - box_w / 2 - 0.15, (yt + yb) / 2,
-                    marker=">", markersize=8, color=color[c])
-            seen_so_far.add(c)
-
-    for k in range(K):
-        last_seen = {c for c in seg_top[k] if c not in (seg_top[k + 1] if k + 1 < K else [])}
-        for c in last_seen:
-            x, yt, yb = boxes[(k, c)]
-            ax.plot([x + box_w / 2, x + box_w / 2 + 0.15],
-                    [(yt + yb) / 2, (yt + yb) / 2],
-                    color=color[c], lw=2, alpha=0.6)
-
-    # Segment labels
+    # Cabeçalhos dos segmentos.
+    y_head = row_h / 2 + 0.5
     for k, (s, e) in enumerate(bounds):
-        ax.text(col_x[k], 1.2, f"Seg. {k+1}\n¶{s+1}–{e}",
+        ax.text(col_x[k], y_head, f"Seg. {k+1}\n¶{s+1}–{e}",
                 ha="center", va="bottom", fontsize=10, color="#374151",
                 fontweight="bold")
 
-    ax.set_xlim(col_x[0] - 1.6, col_x[-1] + 1.6)
-    y_min = -top_per_seg * (box_h + gap) - 0.4
-    ax.set_ylim(y_min, 2.5)
+    ax.set_xlim(x_label - 3.2, col_x[-1] + box_w)
+    ax.set_ylim(-(L - 1) * step - row_h, y_head + 1.4)
     ax.axis("off")
     ax.set_title(
         f"{title} · fluxo de tópicos por segmento (top-{top_per_seg} em {K} segmentos sequenciais)\n"
-        "blocos = peso local · faixas = persistência · ▶ = primeira aparição na cadeia",
+        "cada faixa é um termo · bloco = presença no top-5 (número = contagem local) · "
+        "fita = persistência entre segmentos vizinhos · ▶ = estreia na cadeia",
         fontsize=13, color="#0e1116", pad=14,
     )
     fig.tight_layout()
