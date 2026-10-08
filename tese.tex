@@ -5,6 +5,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Formatação de Títulos %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage[backend=biber]{biblatex}
+
 % Define a profundidade da numeração e do sumário para nível 3 (subsubsection)
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -23,6 +27,33 @@
 \DeclareCaptionFont{tenpt}{\fontsize{8}{10}\selectfont}
 \captionsetup{font=tenpt}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Estilos de Páginas (Paginação) %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Estilo Pré-Textual: Número contado, mas invisível (branco)
+\fancypagestyle{prebranco}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyfoot[C]{\textcolor{white}{\thepage}}%
+}
+
+% 2. Estilo Textual Normal (fancy): Número preto no CANTO SUPERIOR DIREITO
+\fancypagestyle{fancy}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[R]{\textcolor{black}{\thepage}}% Cabeçalho à direita
+  \fancyfoot{}% Garante rodapé limpo
+}
+
+% 3. Estilo Abertura de Capítulo (plain): Número preto no CANTO SUPERIOR DIREITO
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[R]{\textcolor{black}{\thepage}}% Cabeçalho à direita
+  \fancyfoot{}% Garante rodapé limpo
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%% Dados %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\autor}{Nome completo do aluno}
 \newcommand{\titulo}{Título da defesa}
@@ -37,68 +68,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%% Documento %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-% Pré-textual: Sem numeração romana. Começa totalmente limpo (empty),
-% sem imprimir absolutamente nada nos cabeçalhos ou rodapés.
-\pagestyle{empty}
-\hypersetup{pageanchor=false}
+% Série ÚNICA de páginas em arábico desde a capa, SEM reset ao longo do documento.
+% No pré-textual o número é CONTADO mas fica BRANCO (invisível).
+\pagenumbering{arabic}
+\pagestyle{prebranco}
+\hypersetup{pageanchor=true}          % âncoras ligadas desde a capa
 
-% Força que qualquer abertura de capítulo/página gerada por pacotes herde o estilo 'empty' no pré-textual
-\assignpagestyle{\chapter}{empty} 
+% Aberturas de capítulo* do pré-textual herdam o estilo de número branco
+\assignpagestyle{\chapter}{prebranco}
 
-%%% ==================== BLOCO ISOLADO (SEM NÚMEROS) ====================
+%%% ==================== BLOCO PRÉ-TEXTUAL (NÚMERO BRANCO) ====================
 
 %%% CAPA
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \input{capa}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% FOLHA DE ROSTO
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \input{folha-de-rosto}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
-%%% FICHA CATALOGRÁFICA (Se for descomentar, a trava já está aplicada no pagecommand)
-%\thispagestyle{empty}
-%\includepdf[pagecommand={\thispagestyle{empty}}]{ficha-catalografica}
-%\clearpage
+%%% FICHA CATALOGRÁFICA
+\thispagestyle{prebranco}
+\includepdf[pagecommand={\thispagestyle{prebranco}}]{ficha-catalografica}
+\clearpage
 
-%%% FOLHA DE APROVAÇÃO (Se for descomentar, a trava já está aplicada no pagecommand)
-%\thispagestyle{empty}
-%\includepdf[pagecommand={\thispagestyle{empty}}]{folha-de-aprovacao}
-%\clearpage
+%%% FOLHA DE APROVAÇÃO
+\thispagestyle{prebranco}
+\input{folha-de-aprovacao}            % <<< ALTERADO: era \includepdf; agora \input (folha digitada .tex)
+\thispagestyle{prebranco}
+\clearpage
 
 %%% DEDICATÓRIA
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \input{dedicatoria}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% AGRADECIMENTOS
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \input{agradecimentos}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% EPÍGRAFE
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \input{epigrafe}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
-
-%%% ==================== FIM DO BLOCO ISOLADO ====================
 
 %%% RESUMO
 \chapter*{}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \addcontentsline{toc}{chapter}{Resumo}
 \input{resumo}
 \clearpage
 
 %%% ABSTRACT
 \chapter*{}
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \addcontentsline{toc}{chapter}{Abstract}
 \input{abstract}
 \clearpage
@@ -106,35 +137,40 @@
 %%% LISTA DE ILUSTRAÇÕES
 \renewcommand{\listfigurename}{Lista de Ilustrações}
 \listoffigures
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% LISTA DE TABELAS
 \listoftables
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% ABREVIAÇÕES
 \input{abreviacoes}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% SÍMBOLOS
 \input{simbolos}
+\thispagestyle{prebranco}
 \clearpage
 
 %%% SUMÁRIO
 \tableofcontents
-\thispagestyle{empty}
+\thispagestyle{prebranco}
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% CORPO %%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\assignpagestyle{\chapter}{plain} % Devolve o comportamento normal para os capítulos textuais
-\pagenumbering{arabic}
-\hypersetup{pageanchor=true} 
-\pagestyle{fancy}
+%%% ==================== FIM DO PRÉ-TEXTUAL (BRANCO) ====================
 
-\input{ex_cap0}   % Apresentação / Introdução (Será a página 1 oficial)
+%%%%%%%%%%%%%%%%%%%%%%%%%% A PARTIR DAQUI O NÚMERO APARECE (PRETO - SUPERIOR DIREITO) %%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\assignpagestyle{\chapter}{plain} % Aberturas de capítulo usam o estilo plain (topo direito)
+\pagestyle{fancy}                 % Páginas normais usam o estilo fancy (topo direito)
+
+%%% PREFÁCIO (primeira página com número visível)
+\input{ex_cap}                     % arquivo do prefácio
+
+\input{ex_cap0}   % Apresentação / Introdução
 \input{ex_cap1}
 \input{ex_cap2}
 \input{ex_cap3}
@@ -148,7 +184,7 @@
 \printbibliography[title=Referências]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% APÊNDICES %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\appendix
+\appendix
 %\input{glossario}
 %\input{ex_ape1}
 %\input{ex_ape2}
@@ -156,9 +192,9 @@
 %\input{ex_ape4}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% ANEXOS %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\chapter*{Anexos}
-%\addcontentsline{toc}{chapter}{Anexos}
-%\input{ex_ane1}
+\chapter*{Anexos}
+\addcontentsline{toc}{chapter}{Anexos}
+\input{ex_ane1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% LICENÇAS %%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{cc-by}

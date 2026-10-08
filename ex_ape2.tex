@@ -1,0 +1,57 @@
+
+% ex_anexo_iag.tex
+% Anexo: Declaração de Uso de Inteligência Artificial Generativa (PRPG/Unicamp)
+ 
+\chapter*{Apêndice}
+\addcontentsline{toc}{chapter}{Apêndice}
+\thispagestyle{empty}
+
+\chapter*{Apêndice 1: Exemplos de conversas com a inteligência artificial}
+\addcontentsline{toc}{chapter}{Apêndice 1: Exemplos de conversas com a inteligência artificial}
+
+{\small % fonte menor para todo o anexo
+
+Reúno neste anexo dois exemplos de conversas que tive com a inteligência artificial ao longo pesquisa, com o Claude e o Claude Code, da empresa Anthropic. Escolhi trechos de caráter recursivo-argumentativo, em que o raciocínio se desenrola em vai e volta, e os reproduzo quase na íntegra, com cortes mínimos, para que a interlocução se dê a ver como de fato aconteceu. Fiz apenas uma normalização de leitura, corrigindo erros de digitação, de pontuação e de concordância que dificultariam o acompanhamento, e preservei o vocabulário, o encadeamento e o registro do trabalho. As minhas falas aparecem sob \textbf{[Pesquisadora]} e as do modelo sob \textbf{[Claude]}. Onde recortei uma passagem, marco a supressão com [\ldots]. Estas são as mesmas ferramentas cujo uso descrevo no prefácio e na Declaração de Uso de Inteligência Artificial Generativa, e os exemplos servem para dar a ver, em concreto, o que ali descrevo.
+
+% ---- ambiente de diálogo, compacto ----
+\newenvironment{conversa}%
+  {\par\medskip\footnotesize\setlength{\parskip}{2pt}\setlength{\parindent}{0pt}%
+   \leftskip=0.5em \rightskip=0.5em}%
+  {\par\medskip}
+\newcommand{\pesq}[1]{\par\smallskip\noindent\textbf{[Pesquisadora]}\quad #1\par}
+\newcommand{\claude}[1]{\par\smallskip\noindent\textbf{[Claude]}\quad{\ttfamily\small #1}\par}
+
+\bigskip
+\noindent\textbf{1. Sobre o objetivo da tese} 
+\begin{conversa}
+\pesq{Ei, fiquei pensando sobre essa análise e uma coisa está me incomodando: por que fiz tudo isso? Por que isso importa? Por que isso importa para a minha tese? Onde quero chegar?}
+
+\claude{Essa pergunta é legítima e merece uma resposta direta, não uma defesa do que já foi feito. Deixa eu pensar com você em voz alta, e ser honesto sobre o que vejo. Você passou três meses construindo um pipeline lexicométrico que conta palavras em seis obras de Latour e produz quatro tabelas, oito figuras, três etapas de validação e um repositório público. O argumento que esse trabalho sustenta cabe em uma frase: Latour mobiliza vocabulário militar-industrial quando descreve a tecnociência e vocabulário têxtil-topológico quando descreve a própria teoria. Essa frase é verdadeira. Mas eu preciso ser honesto: ela não é, sozinha, suficiente para justificar três meses de pipeline, e talvez também não para justificar o espaço que essa análise ocupa no seu capítulo~2. Não porque seja errada ou irrelevante, mas porque a tese central da sua tese não depende dela para existir. Você poderia ter escrito o capítulo~2 sem essa análise, e o argumento central da tese ficaria de pé. Então: por que fez?
+
+Hipótese 1, a mais forte: é evidência empírica de uma operação metodológica que você reivindica e precisa demonstrar. A análise lexicométrica em parceria com o Claude Code, documentada como projeto público, é a tecnografia em ato. Não é argumento sobre tecnografia, é uma instância dela, e é a única instância em que a IA aparece como colaboradora produzindo conhecimento sobre o próprio campo que sustenta a tese inteira. Sem essa análise, a tecnografia fica como conceito que você reivindica; com ela, fica como prática que você demonstra. O capítulo~2 não é o lugar onde a análise prova algo sobre Latour, é o lugar onde a tese prova algo sobre si mesma.
+
+Hipótese 2, intermediária: é o ato que autoriza a sua escolha figural na tese inteira. Você escolheu o vocabulário têxtil-feminista como figuração da sua escrita. A análise mostra que esse vocabulário está dentro de Latour, não fora dele em oposição. Isso retira o capítulo~2 da posição de capítulo polêmico e o coloca como capítulo que autoriza, pela leitura interna da obra latouriana, o seu uso plural dos dois vocabulários ao longo da tese.
+
+Hipótese 3, a mais fraca, a que me preocupa: você fez porque podia fazer. A composição com o Claude Code tornou tecnicamente possível conduzir uma análise densa em três meses. Você fez porque o instrumento existia, porque era novo, porque rendeu, porque a banca pode achar impressionante. Esses são todos motivos legítimos, mas nenhum deles é o argumento da tese. Eu não sei dizer, daqui, se a Hipótese~3 é verdade ou não. Você sabe melhor do que eu. Mas a pergunta que você acabou de me fazer, ``por que fiz tudo isso?'', é exatamente a pergunta que se faz quando se desconfia que a Hipótese~3 está operando.
+
+O que eu faria no seu lugar, em ordem de custo crescente. Custo zero: trocar a Hipótese~1 de implícita para explícita. Hoje, a análise lexicométrica do capítulo~2 é tecnografia em ato, mas o texto não diz isso, e o leitor da banca não vai conectar sozinho. Acrescentar um parágrafo que diga que a análise é, ela mesma, instância do que a tese chama de tecnografia move a análise de ``prova externa sobre Latour'' para ``demonstração interna do método da tese''. Sozinho, ele neutraliza grande parte da minha preocupação com a Hipótese~3.}
+\end{conversa}
+
+\bigskip
+\noindent\textbf{2. Sobre figurações e vocabulário}
+
+\begin{conversa}
+\pesq{Observe que, como estou trabalhando desde o capítulo~1 com metáforas e figurações, e como isso impacta nos modos de pensamento e produção do conhecimento, não posso usar termos como ``recrutar aliados'' de forma ingênua, uma vez que a primeira parte do capítulo se propõe a tensionar isso via Latour e Haraway.}
+
+\claude{Você está certa, e essa observação reorganiza tudo o que eu propus nas últimas duas respostas. Deixa eu pensar o que aconteceu. Eu construí o template inteiro sobre o verbo ``recrutar aliados'', e cada componente do template repete esse verbo como se fosse vocabulário descritivo neutro. Mas é exatamente o oposto: ``recrutar aliados'' é o vocabulário latouriano militar-industrial cuja densidade quantitativa você documentou na análise textual da abertura, e cuja crítica figural organiza o capítulo inteiro. Se eu adoto o vocabulário do alistamento como modo de descrever o que o capítulo~2 faz, eu reproduzo no miolo exatamente a operação que a abertura desconstrói. O capítulo se autorrefutaria.
+
+Antes de propor um novo template, preciso fazer o trabalho que não fiz: mapear que vocabulários a tradição que você adota oferece como alternativas ao alistamento. Trabalho com seis famílias. Família~1, tecitura, costura, trama (Haraway, Strathern, Law): os autores não são alistados, são fios que entram na trama; o capítulo não recruta, costura. Família~2, compostagem (Haraway): os autores não são aliados que se alinham, são camadas heterogêneas que fermentam juntas. Família~3, conversação, escuta, oferecimento (Stengers, Despret): os autores não são recrutados, são convidados a uma conversa. Família~4, difração, intra-ação (Barad, Haraway). Família~5, parentesco, fazer parentes (Haraway). Família~6, permanecer no problema (Haraway). Há ainda uma decisão prévia: a tensão alistar/aliar precisa continuar tensionada ao longo do miolo, ou precisa ser deslocada?}
+
+\pesq{Acho que cada uma das famílias pode ser convocada em diferentes momentos, a depender do contexto. Portanto, seria bom explicitar essas famílias no texto, ao final da seção da análise das figurações com Latour, para mostrar que os modos como pensamos importam, algo que venho me perguntando: quais são os efeitos reais de pensar dessa forma e não de outra? Que tipos de pensamentos, conhecimentos e mundos essas figurações marcadas e situadas produzem? Se não faço uma revisão bibliográfica, se não recruto aliados, se faço alianças, compostagens, parentesco, o que isso significa na prática da pesquisa etnográfica? Sobre a segunda pergunta: tensionar, cada seção do miolo mantém os dois vocabulários ativos, registrando que alisto e ofereço ao mesmo tempo.}
+
+\claude{Boas decisões, e a sua resposta à primeira pergunta na verdade resolve um problema arquitetônico que eu estava tratando como problema de vocabulário. Você não está escolhendo uma família entre cinco; está propondo que a escolha entre famílias seja ela mesma objeto explícito do capítulo. Isso é qualitativamente diferente, e melhor. Deixa eu reformular o que você propõe. Ao final da seção da análise das figurações de Latour, você quer um bloco-bisagra que faça a pergunta explicitamente, que efeitos reais tem pensar com uma família de figurações e não com outra; que apresente as famílias como repertório vivo, e não como inventário neutro; e que marque que cada família, ao organizar o pensamento de modo distinto, produz mundos, conhecimentos e responsabilidades distintos. Isso transforma o miolo do capítulo~2 em uma série de experimentos de figuração: cada seção é um caso em que se mostra, na prática da escrita, o que muda quando se pensa com uma família e não com outra. A pergunta ``que mundos esse pensamento produz?'' não é decorativa, ela é a pergunta epistemológica e política central do capítulo.}
+\end{conversa}
+
+\textcolor{red}{[obs.: a ideia é inserir exemplo de conversas sobre outros temas/tarefas e com o claude code também ...]}
+
+} % fim do \small

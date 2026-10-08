@@ -1,0 +1,84 @@
+% extrato_ficha.tex
+% Documento AUXILIAR (não é a tese): gera um PDF só com o pré-textual inicial,
+% da capa ao abstract + folha de aprovação, para enviar à biblioteca no pedido
+% da ficha catalográfica. Usa o mesmo preâmbulo da tese (\input{pacotes},
+% \input{configuracao}) para que as páginas saiam idênticas às da tese final.
+
+\documentclass[10pt, letterpaper, oneside]{book}
+
+%%% Pacotes e configurações (idênticos à tese)
+\input{pacotes}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\titleformat{\chapter}[display]
+  {\normalfont\fontsize{18}{22}\selectfont\bfseries}
+  {\chaptertitlename\ \thechapter}{10pt}{}
+\titleformat{\section}{\normalfont\fontsize{15}{18}\selectfont\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\fontsize{13}{16}\selectfont\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\fontsize{11}{14}\selectfont\bfseries}{\thesubsubsection}{1em}{}
+
+\DeclareCaptionFont{tenpt}{\fontsize{8}{10}\selectfont}
+\captionsetup{font=tenpt}
+
+% Numeração invisível (não interessa neste extrato)
+\fancypagestyle{prebranco}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyfoot[C]{\textcolor{white}{\thepage}}%
+}
+
+%%% Dados (idênticos à tese)
+\newcommand{\autor}{Nome completo do aluno}
+\newcommand{\titulo}{Título da defesa}
+\def\aplicada{}
+\newcommand{\orientador}{Nome completo do orientador}
+\newcommand{\coorientador}{Nome completo do coorientador}
+\newcommand{\ano}{Ano}
+
+\input{configuracao}
+
+\begin{document}
+
+\pagenumbering{arabic}
+\pagestyle{prebranco}
+\hypersetup{pageanchor=true}
+\assignpagestyle{\chapter}{prebranco}
+
+%%% CAPA
+\thispagestyle{prebranco}
+\input{capa}
+\thispagestyle{prebranco}
+\clearpage
+
+%%% FOLHA DE ROSTO
+\thispagestyle{prebranco}
+\input{folha-de-rosto}
+\thispagestyle{prebranco}
+\clearpage
+
+% (Ficha catalográfica omitida de propósito: é o que será solicitado à biblioteca.)
+
+%%% FOLHA DE APROVAÇÃO
+\thispagestyle{prebranco}
+\input{folha-de-aprovacao}
+\thispagestyle{prebranco}
+\clearpage
+
+%%% RESUMO
+\chapter*{}
+\thispagestyle{prebranco}
+\input{resumo}
+\clearpage
+
+%%% ABSTRACT
+\chapter*{}
+\thispagestyle{prebranco}
+\input{abstract}
+\clearpage
+
+\end{document}
