@@ -607,13 +607,23 @@ SR = 16_000   # taxa de amostragem (Hz) -- padrao Spira
 y, sr = librosa.load("Spira_controle.wav", sr=SR)
 # y: array de amplitudes (variacao de pressao do ar amostrada)
 # 16.000 amostras por segundo: o mundo antes da forma
+from matplotlib.collections import LineCollection
 times = np.linspace(0, len(y) / sr, num=len(y))
-fig, ax = plt.subplots(figsize=(12, 3))
-ax.plot(times, y, color="white", linewidth=0.3, alpha=0.85)
+# cada segmento da linha recebe uma cor conforme a amplitude:
+# a intensidade do sinal e mapeada para a paleta viridis
+pontos = np.array([times, y]).T.reshape(-1, 1, 2)
+segmentos = np.concatenate([pontos[:-1], pontos[1:]], axis=1)
+amplitude = np.abs(y) / np.abs(y).max()
+fig, ax = plt.subplots(figsize=(12, 3), facecolor="white")
+lc = LineCollection(segmentos, cmap="viridis",
+                    array=amplitude[:-1], linewidth=0.5)
+ax.add_collection(lc)
+ax.set_xlim(times.min(), times.max())
+ax.set_ylim(y.min() * 1.05, y.max() * 1.05)
 ax.set_axis_off()
 plt.savefig("Spira_waveform_controle.png",
             dpi=150, bbox_inches="tight",
-            pad_inches=0, facecolor="black")
+            pad_inches=0.02, facecolor="white")
 \end{lstlisting}
 
 \begin{figure}[htbp]
@@ -634,8 +644,8 @@ y_p, sr_p = librosa.load("PTT-20200511-WA0018.wav", sr=SR)
 # mesmos parametros, outro corpo
 # PTT = Push-To-Talk, WA = WhatsApp, 20200511 = 11 mai. 2020
 # uma voz enviada por mensagem antes de se tornar dado cientifico
-# visualizacao: mesma sequencia de times/plot/savefig da Listagem 1
-# (facecolor="black", linewidth=0.3, resultado em Spira_waveform_paciente.png)
+# visualizacao: mesma sequencia da Listagem 1 (LineCollection + viridis)
+# (gradiente por amplitude sobre facecolor="white", em Spira_waveform_paciente.png)
 \end{lstlisting}
 
 \begin{figure}[htbp]
@@ -679,7 +689,7 @@ O terceiro gesto inscreve a voz em uma imagem espectral sem nomes, eixos, escala
 \begin{lstlisting}[caption={A textura espectral antes de qualquer nomeação (resultado na Figura~\ref{fig:espectrograma-sem-legenda}).}]
 import librosa.display
 
-CMAP = "magma"
+CMAP = "viridis"
 
 fig, ax = plt.subplots(figsize=(12, 6))
 librosa.display.specshow(
@@ -888,7 +898,7 @@ O processamento algorítmico realiza uma leitura que se faz através do reconhec
 
 O que o médico chama de IR e o que o algoritmo aprende a reconhecer como IR compartilham um nome, e o que cada um deles performa são objetos que pertencem a espaços topológicos distintos, como a análise das três versões da insuficiência respiratória, desenvolvida adiante nesta seção, desdobra a partir do vocabulário de Mol e Law.\footnote{A apresentação desta seção ao LA'GRIMA (Laboratório de Grafias e Imagens na Pesquisa Antropológica, IFCH-\texttt{Unicamp}), em março de 2026, permitiu desenvolver esse argumento no contexto de uma discussão sobre modos de ver, inscrição e escrita etnográfica em laboratórios de inteligência artificial. O trabalho foi apresentado na mesa \enquote{Tecnociência, Arte, Literatura e Sonhos: Dobras em um Laboratório}, no evento de dez anos do LA'GRIMA, em 12 de março de 2026, com o título \textit{A imagem do som: espectrograma, inscrição e escrita etnográfica em laboratório de inteligência artificial}. O roteiro comentado dessa apresentação está disponível como material de apoio desta tese.}
 
-O espectrograma mel chega à \texttt{CNN} já como uma matriz de números, produzida na etapa de pré-processamento: 128 linhas correspondendo a bandas de frequência e $n$ colunas correspondendo a instantes de tempo, cada célula registrando a intensidade de energia naquela frequência naquele momento. A \texttt{CNN} aplica filtros de convolução sobre essa matriz e detecta padrões espaciais no arranjo dos valores: gradientes, texturas, formas distribuídas ao longo das duas dimensões. Esses padrões, detectados como operações numéricas sobre números, são o que a rede lê. A imagem colorida que aparece nas figuras desta seção, do roxo escuro ao amarelo da escala \textit{magma}, é produzida a partir dessa mesma matriz, e os valores numéricos são mapeados para cores para que pesquisadores, médicos e leitores de artigos possam inspecionar e comunicar o que está nos dados, e essa colorização não integra o que entra na rede. Existem, portanto, dois objetos produzidos a partir da mesma matriz: os padrões espaciais que a rede detecta por operações numéricas e a imagem colorida que os humanos leem. Barthes observou que na fotografia o referente adere à imagem e se torna invisível enquanto imagem, e é o referente que o olho humano vê, e não a superfície fotográfica \parencite[pp.~5--6]{Barthes1984}. No espectrograma, essa relação se inverte em sentido duplo. Para o humano que conhece a origem do arquivo, o referente pode irromper e transformar a grade em algo que age sobre quem olha, que guarda um \enquote{isso foi} no sentido barthesiano. Para o algoritmo, a inversão é constitutiva, porque processa apenas a grade, e o referente jamais aparece, dado que o algoritmo não tem a capacidade de ser atingido por aquilo que a grade representa. O que cada um percebe no espectrograma são coisas distintas, produzidas por práticas distintas de percepção, e é por isso que o grão da voz permanece apagado aqui, uma vez que o silêncio que a grade carrega não é perceptível por quem age sobre ela por convolução.
+O espectrograma mel chega à \texttt{CNN} já como uma matriz de números, produzida na etapa de pré-processamento: 128 linhas correspondendo a bandas de frequência e $n$ colunas correspondendo a instantes de tempo, cada célula registrando a intensidade de energia naquela frequência naquele momento. A \texttt{CNN} aplica filtros de convolução sobre essa matriz e detecta padrões espaciais no arranjo dos valores: gradientes, texturas, formas distribuídas ao longo das duas dimensões. Esses padrões, detectados como operações numéricas sobre números, são o que a rede lê. A imagem colorida que aparece nas figuras desta seção, do roxo escuro ao amarelo da escala \textit{viridis}, é produzida a partir dessa mesma matriz, e os valores numéricos são mapeados para cores para que pesquisadores, médicos e leitores de artigos possam inspecionar e comunicar o que está nos dados, e essa colorização não integra o que entra na rede. Existem, portanto, dois objetos produzidos a partir da mesma matriz: os padrões espaciais que a rede detecta por operações numéricas e a imagem colorida que os humanos leem. Barthes observou que na fotografia o referente adere à imagem e se torna invisível enquanto imagem, e é o referente que o olho humano vê, e não a superfície fotográfica \parencite[pp.~5--6]{Barthes1984}. No espectrograma, essa relação se inverte em sentido duplo. Para o humano que conhece a origem do arquivo, o referente pode irromper e transformar a grade em algo que age sobre quem olha, que guarda um \enquote{isso foi} no sentido barthesiano. Para o algoritmo, a inversão é constitutiva, porque processa apenas a grade, e o referente jamais aparece, dado que o algoritmo não tem a capacidade de ser atingido por aquilo que a grade representa. O que cada um percebe no espectrograma são coisas distintas, produzidas por práticas distintas de percepção, e é por isso que o grão da voz permanece apagado aqui, uma vez que o silêncio que a grade carrega não é perceptível por quem age sobre ela por convolução.
 
 O \textit{hinterland} de Law nomeia o que torna essa escuta e essa visão possíveis \parencite{Law2004After}. O \textit{hinterland} do espectrograma mel do \texttt{Spira} inclui o \texttt{YouTube}, os protocolos hospitalares que definiram quais pacientes podiam ser recrutados, a infraestrutura computacional do \texttt{IME-USP} e o próprio vírus SARS-CoV-2 que concentrou pacientes com o perfil acústico específico que o sistema aprendeu a reconhecer. Nenhum desses elementos aparece no artigo científico; todos são condição de possibilidade do resultado que o artigo reporta. Quando Law afirma que o método ajuda a produzir o que estuda \parencite{Law2004After}, está dizendo que a escolha dos 128 coeficientes mel incide no plano ontológico, porque performa uma versão da insuficiência respiratória que inclui certos corpos e exclui outros, que funciona em certos contextos e falha em outros. Mol e Law denominam isso de política ontológica \parencite{mol1999ontological}, e, se realidades são múltiplas e performadas por práticas, a questão deixa de ser qual representação está correta e passa a ser quais realidades se fortalecem. A decisão de usar 128 coeficientes em vez de 64, de aplicar a escala mel em vez da linear, de pré-treinar no \texttt{AudioSet} em vez de treinar do zero com dados hospitalares: cada uma dessas decisões é uma política sobre qual versão da insuficiência respiratória a rede neural aprenderá a escutar e a ver. A política ontológica de Mol não se restringe, porém, às escolhas técnicas de design, e alcança também as condições que tornaram possível a produção daquela versão específica da IR. O covideiro pandêmico que produziu os dados do \texttt{Spira} existiu nas condições que existiu porque uma política sanitária específica deixou os hospitais cheios: o negacionismo, os tratamentos sem respaldo científico, a recusa à vacinação acelerada, o número de mortes que uma política de ciência teria podido reduzir. Essas escolhas políticas são condição de possibilidade do \textit{dataset}, e portanto da IR acústica que o sistema aprendeu a reconhecer. Nos termos de Mol, elas são parte da política ontológica que produziu aquela versão específica da doença como objeto computacional. O \texttt{Spira} aprendeu a insuficiência respiratória que o Brasil de 2020 produziu, com tudo o que essa produção implicou.
 
@@ -939,7 +949,7 @@ O repositório principal disponibiliza os dados de áudio em dois arquivos compa
 
 No diálogo com o modelo de linguagem, esclareci um aspecto da coleta com relevância direta para o argumento deste capítulo, uma vez que o \textit{dataset} foi produzido de forma completamente anônima. Os arquivos \texttt{.wav} são identificados apenas por metadados neutros: sexo, faixa etária, saturação de oxigênio no sangue e uso de máscara. Nenhuma etiqueta indica o enunciado vocal produzido em cada gravação e nenhuma informação permite identificar os voluntários, inclusive pelos próprios pesquisadores. A impossibilidade de nomear a voz que gerou cada espectrograma não é, portanto, apenas uma questão ética, e é uma propriedade estrutural do \textit{dataset}, a condição que tornou possível sua publicação e circulação como dado aberto. Nos termos de \textcite{Latour2017Esperanca}, é o preço da mobilidade, porque, para que a voz viajasse do celular ao laboratório, do laboratório ao artigo e do artigo às redes neurais, ela precisou deixar para trás tudo o que a tornava de alguém.
 
-Os espectrogramas exibidos nas Figuras~\protect\ref{fig:espectrograma-sem-legenda}, \ref{fig:espectrograma-com-eixos}, \ref{fig:paciente-sem-legenda} e~\ref{fig:paciente-com-eixos} foram gerados a partir de arquivos \texttt{.wav} extraídos do \textit{dataset} público, utilizando o código \texttt{Python} que produzi junto ao modelo de linguagem durante a sessão de trabalho. Os parâmetros \texttt{sr=16000} (taxa de amostragem de 16~kHz), \texttt{n\_mels=128} (128 coeficientes mel) e \texttt{fmax=8000} (frequência máxima de 8~kHz) correspondem ao padrão técnico descrito nos artigos do projeto \parencite{Casanova2021DeepLearning,Gauy2024Discriminant}. A gravação do grupo controle utilizada tem duração de 8,53 segundos e taxa de amostragem de 16~kHz; a gravação do grupo paciente é o arquivo \texttt{PTT-20200511-WA0018.wav}, coletado em enfermaria de Covid-19 em 11 de maio de 2020 via \texttt{WhatsApp}.\footnote{O nome do arquivo \texttt{PTT-20200511-WA0018.wav} preserva rastros do percurso de coleta: \texttt{PTT} (\textit{Push-To-Talk}) e \texttt{WA} (\texttt{WhatsApp}) indicam que a gravação foi enviada por mensagem de voz pelo aplicativo em 11 de maio de 2020. A voz do paciente hospitalizado passou pelo mesmo canal de comunicação doméstica antes de se tornar dado científico. Esse detalhe, invisível no artigo publicado, é ele próprio uma inscrição que a des-crição \parencite{Akrich1992Description} recupera, uma vez que a infraestrutura de coleta dependia do celular disponível na mão de quem gravava, e o \texttt{WhatsApp} foi um dos vetores dessa coleta situada.}
+Os espectrogramas exibidos nas Figuras~\protect\ref{fig:espectrograma-sem-legenda}, \ref{fig:espectrograma-com-eixos}, \ref{fig:paciente-sem-legenda} e~\ref{fig:paciente-com-eixos} foram gerados a partir de arquivos \texttt{.wav} extraídos do \textit{dataset} público, utilizando o código \texttt{Python} que produzi junto ao modelo de linguagem durante a sessão de trabalho. Os parâmetros \texttt{sr=16000} (taxa de amostragem de 16~kHz), \texttt{n\_mels=128} (128 coeficientes mel) e \texttt{fmax=8000} (frequência máxima de 8~kHz) correspondem ao padrão técnico descrito nos artigos do projeto \parencite{Casanova2021DeepLearning,Gauy2024Discriminant}. A gravação do grupo controle utilizada tem duração de 12,26 segundos e taxa de amostragem de 16~kHz; a gravação do grupo paciente é o arquivo \texttt{PTT-20200511-WA0018.wav}, coletado em enfermaria de Covid-19 em 11 de maio de 2020 via \texttt{WhatsApp}.\footnote{O nome do arquivo \texttt{PTT-20200511-WA0018.wav} preserva rastros do percurso de coleta: \texttt{PTT} (\textit{Push-To-Talk}) e \texttt{WA} (\texttt{WhatsApp}) indicam que a gravação foi enviada por mensagem de voz pelo aplicativo em 11 de maio de 2020. A voz do paciente hospitalizado passou pelo mesmo canal de comunicação doméstica antes de se tornar dado científico. Esse detalhe, invisível no artigo publicado, é ele próprio uma inscrição que a des-crição \parencite{Akrich1992Description} recupera, uma vez que a infraestrutura de coleta dependia do celular disponível na mão de quem gravava, e o \texttt{WhatsApp} foi um dos vetores dessa coleta situada.}
 
 As dependências necessárias para reproduzir o código são instaláveis via \texttt{pip install librosa matplotlib numpy}.
 
@@ -966,7 +976,7 @@ S_dB = librosa.power_to_db(S, ref=np.max)
 # Figura sem eixos (registro inicial, antes da nomeacao analitica)
 fig, ax = plt.subplots(figsize=(12, 6))
 librosa.display.specshow(S_dB, sr=sr, x_axis=None, y_axis=None,
-                         cmap='magma', ax=ax)
+                         cmap='viridis', ax=ax)
 ax.set_axis_off()
 plt.tight_layout(pad=0)
 plt.savefig("Spira_espectrograma_sem_legenda.png",
@@ -978,7 +988,7 @@ plt.close()
 fig, ax = plt.subplots(figsize=(12, 5))
 img = librosa.display.specshow(S_dB, sr=sr, x_axis='time',
                                y_axis='mel', fmax=8000,
-                               cmap='magma', ax=ax)
+                               cmap='viridis', ax=ax)
 fig.colorbar(img, ax=ax, format='%+2.0f dB')
 ax.set_xlabel('Tempo (s)', fontsize=12)
 ax.set_ylabel('Frequencia (Mel)', fontsize=12)
