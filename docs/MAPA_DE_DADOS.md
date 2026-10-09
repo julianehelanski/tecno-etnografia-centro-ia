@@ -1,0 +1,31 @@
+# Mapa de dados da tese
+
+Índice dos repositórios que compõem os materiais da tese *{tecnografia} de um centro de inteligência artificial: seguindo cientistas e engenheiros, universidade afora* (Helanski, Unicamp, 2026), com o que cada um contém, onde seus resultados entram na tese e como foram produzidos. Documento escrito em 09/10/2026 a partir da leitura dos arquivos `ex_cap*.tex` (commit 3f0f671, 08/10/2026) e dos cinco repositórios satélites. Cada repositório satélite tem o detalhamento figura a figura em `docs/USO_NA_TESE.md` e `docs/uso_na_tese.csv`.
+
+## Fluxo geral
+
+Dados e textos de origem (CAPES, SciELO, OpenAlex, relatórios do C4AI, obras de Latour, dataset público do Spira) entram em scripts Python e R dos repositórios satélites; as figuras geradas são copiadas para `figuras/` deste repositório e citadas em `ex_cap*.tex`; este repositório, por sua vez, alimenta o site `tecno-etnografia-tese-site`, que gera a rede textual da tese a partir dos arquivos `.tex` e publica as galerias de figuras. O fluxo de cópia das figuras é feito pelo script `atualizar_figuras_tese.sh` (casamento por nome de arquivo) e a notificação ao site pelo workflow `.github/workflows/notify-c4ai.yml`.
+
+## Repositórios
+
+| Repositório | Capítulo e seção da tese | Conteúdo | Dados de origem | Figuras na tese |
+|---|---|---|---|---|
+| `tecno-etnografia-centro-ia` (este) | todos | texto da tese em LaTeX (`ex_cap0` a `ex_cap5`, apêndices, anexo), bibliografia, figuras, análises de rede textual (`infranodus/`) | o próprio texto da tese; entrevistas e diário de campo (não versionados aqui); artigos do projeto Spira | 111 referências a figuras |
+| `analise-figuracoes-latour` | capítulo 2, "Contando figurações" e subseção sobre *AIME* | catálogos de termos, pipeline de extração, KWIC, frequência, desambiguação de `war`, co-ocorrência, Reinert/AFC, outputs por etapa | seis textos de Latour (PDFs fora do repositório) | 7 |
+| `bibliometria-ia-humanas` | capítulo 2, "A emergência do campo brasileiro de estudos em inteligência artificial..." | classificador em cinco subcampos, análises CAPES, SciELO e OpenAlex, figuras e tabelas | dump CAPES `BR-CAPES-BTD-2021A2024-2025-12-01`; API ArticleMeta (SciELO); OpenAlex | 13 |
+| `bibliometria-publicacoes-c4ai` | capítulo 3, "As publicações acadêmicas do C4AI" | base curada de 407 publicações, matriz grupo por ano, composição de equipe, co-word | site do C4AI; relatórios anuais do C4AI à FAPESP (2021 a 2025) | 4 |
+| `spira-espectrogramas` | capítulo 4, "Espectrogramas mel: a imagem da voz" | script de formas de onda, espectrogramas mel e diagrama CNN | dataset público SPIRA (CC BY-SA 4.0) | 6 |
+| `tecno-etnografia-tese-site` | capítulos 1 a 5 (inscrições do próprio texto) e site público | pipeline de rede textual (co-ocorrência, NPMI, Louvain, PageRank), trajetórias lexicais, site | arquivos `.tex` da tese | 43 (inclui cópias espelhadas) |
+
+## Pendências identificadas antes do depósito
+
+1. **Endereços dos repositórios no texto.** `ex_cap1.tex` (nota da seção de auditabilidade pública) aponta para `github.com/julianehelanski/analise_figuracoes` e `github.com/julianehelanski/analise_bibliometrica_ia_ciencias_humanas`. Os repositórios hoje se chamam `analise-figuracoes-latour` e `bibliometria-ia-humanas`, e a nota não lista `bibliometria-publicacoes-c4ai` nem `Spira-espectrogramas`, citados nos capítulos 3 e 4. Os endereços do capítulo 2 (`bibliometria-ia-humanas`) estão corretos.
+2. **Direitos autorais dos textos de Latour.** A nota do capítulo 1 afirma que PDFs e datasets sob copyright ficam fora dos repositórios, e `analise-figuracoes-latour` versiona o texto integral extraído das obras (`corpus/txt*`). Decidir entre retirar, restringir ou substituir por script de reconstrução.
+3. **Cópias divergentes de figuras.** De 30 figuras da tese com origem nos quatro repositórios de análise, 26 têm hash diferente do arquivo homônimo no repositório de origem e 4 são idênticas. As cópias espelhadas no site também diferem das da tese em boa parte dos casos, porque o site regenera os arquivos a partir de uma versão anterior do texto. Parte da divergência vem de ajustes feitos na tese em 27/06/2026 (margem das bolinhas em valor zero) e de padronização de cor feita nos repositórios no mesmo período. É preciso comparar visualmente e eleger a versão de referência de cada uma antes de rodar `atualizar_figuras_tese.sh`, que sobrescreve a cópia da tese. Listas por repositório em `docs/USO_NA_TESE.md` de cada um.
+4. **Áudios no repositório do Spira.** `spira-espectrogramas` contém duas gravações do dataset público e a pasta `projeto-daniela-feriani/` com uma gravação individual (WhatsApp, 06/05/2026) e derivados, apesar de o README afirmar que o dataset não está incluído. Confirmar consentimento e licença.
+5. **Imagens de terceiros.** `figuras/cap.4/covid/`, `figuras/cap.4/artigos-spira/` e `figuras/artigos-marcelo/` reúnem imagens extraídas de artigos e de acervos fotográficos; registrar autoria e licença de cada uma ou retirá-las do depósito.
+6. **Arquivos referenciados e ausentes.** `ex_ane1.tex` inclui `figuras/assinatura_juliane`, `figuras/assinatura_suely.jpg` e `figuras/logo_anexo1`, que não estão no repositório (provavelmente excluídos de propósito, por conter assinaturas).
+7. **Licenças.** Apenas `bibliometria-ia-humanas` tem arquivo `LICENSE`. `analise-figuracoes-latour` declara MIT em `pyproject.toml`, sem o arquivo. Os demais não declaram licença de código, dados ou figuras. A tese traz modelos `cc-by.tex` e `cc-by-sa.tex`; a escolha para dados e figuras é decisão sua e da plataforma de depósito.
+8. **Resíduos neste repositório.** `bibantigo.tex` (90 KB), `src/exem.c`, `tabelas/exem.csv` e `ex_ape4.tex` (vazio) parecem material de modelo ou versões anteriores; confirmar se entram no depósito. A pasta `biblatex_style_samples/` precisa ficar, porque `pacotes.tex` carrega `sample.bib` e `sample-abel.bib` dela.
+9. **Duplicação de `infranodus/`.** Este repositório e `tecno-etnografia-tese-site` contêm cada um uma cópia do pipeline e dos resultados da rede textual, com arquivos de resultado diferentes (regeração em datas distintas). Eleger um dos dois como fonte e referenciar o outro.
+10. **Tamanho.** Este repositório tem cerca de 435 MB e o site cerca de 275 MB, o que pesa no arquivo ZIP do depósito.
