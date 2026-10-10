@@ -41,9 +41,9 @@ O texto da tese é meu. Fiz a tese com três ferramentas de IA generativa, todas
 
 Os *commits* com autor `Claude`, ou com a linha `Co-Authored-By: Claude …`, foram feitos em sessões do Claude Code; a marcação é gerada pela ferramenta e registra em que pontos do histórico o modelo participou do trabalho. A autoria e a responsabilidade pelo conteúdo são minhas e, conforme a Deliberação CONSU-A-005/2026 da Unicamp, as ferramentas de IA generativa não figuram como coautoras. A declaração formal de uso de IA generativa, no modelo da Pró-Reitoria de Pós-Graduação da Unicamp, está no [Anexo 1](ex_ane1.tex).
 
-## Licença
+## Direitos
 
-O texto da tese e as figuras que produzi estão sob [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.pt-br), e o código (por exemplo, `atualizar_figuras_tese.sh`) sob [MIT](LICENSE), conforme [`LICENSE-DADOS.md`](LICENSE-DADOS.md), que lista as exceções (imagens de terceiros, figuras derivadas do SPIRA e material institucional da Unicamp).
+O texto da tese e as figuras deste repositório não estão licenciados para reutilização: todos os direitos reservados à autora. O repositório existe para versionar o texto e alimentar as análises dos demais repositórios (rede textual, figuras), e não como publicação da tese. Os dados, *scripts* e figuras das análises estão licenciados nos seus próprios repositórios. As imagens de terceiros do capítulo 4 estão listadas em `docs/CREDITOS_IMAGENS.md`.
 
 ## Citação
 
