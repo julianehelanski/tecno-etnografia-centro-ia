@@ -41,6 +41,10 @@ O texto da tese é meu. Fiz a tese com três ferramentas de IA generativa, todas
 
 Os *commits* com autor `Claude`, ou com a linha `Co-Authored-By: Claude …`, foram feitos em sessões do Claude Code; a marcação é gerada pela ferramenta e registra em que pontos do histórico o modelo participou do trabalho. A autoria e a responsabilidade pelo conteúdo são minhas e, conforme a Deliberação CONSU-A-005/2026 da Unicamp, as ferramentas de IA generativa não figuram como coautoras. A declaração formal de uso de IA generativa, no modelo da Pró-Reitoria de Pós-Graduação da Unicamp, está no [Anexo 1](ex_ane1.tex).
 
+## Direitos
+
+O texto da tese e as figuras deste repositório não estão licenciados para reutilização: todos os direitos reservados à autora. O repositório existe para versionar o texto e alimentar as análises dos demais repositórios (rede textual, figuras), e não como publicação da tese. Os dados, *scripts* e figuras das análises estão licenciados nos seus próprios repositórios. As imagens de terceiros do capítulo 4 estão listadas em `docs/CREDITOS_IMAGENS.md`.
+
 ## Citação
 
 > CARDOSO, Juliane Cristina Helanski. *Tecnografias de um centro de inteligência artificial*: seguindo cientistas e engenheiros universidade afora. Orientadora: Maria Suely Kofes. 2026. Tese (Doutorado em Ciências Sociais) – Instituto de Filosofia e Ciências Humanas, Universidade Estadual de Campinas, Campinas, 2026.
