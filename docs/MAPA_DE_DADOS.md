@@ -10,12 +10,12 @@ Dados e textos de origem (CAPES, SciELO, OpenAlex, relatórios do C4AI, obras de
 
 | Repositório | Capítulo e seção da tese | Conteúdo | Dados de origem | Figuras na tese |
 |---|---|---|---|---|
-| `tecno-etnografia-centro-ia` (este) | todos | texto da tese em LaTeX (`ex_cap0` a `ex_cap5`, apêndices, anexo), bibliografia, figuras, análises de rede textual (`infranodus/`) | o próprio texto da tese; entrevistas e diário de campo (não versionados aqui); artigos do projeto Spira | 111 referências a figuras |
+| `tecno-etnografia-centro-ia` (este) | todos | texto da tese em LaTeX (`ex_cap0` a `ex_cap5`, apêndices, anexo), bibliografia, figuras | o próprio texto da tese; entrevistas e diário de campo (não versionados aqui); artigos do projeto Spira | 111 referências a figuras |
 | `analise-figuracoes-latour` | capítulo 2, "Contando figurações" e subseção sobre *AIME* | catálogos de termos, pipeline de extração, KWIC, frequência, desambiguação de `war`, co-ocorrência, Reinert/AFC, outputs por etapa | seis textos de Latour (PDFs fora do repositório) | 7 |
 | `bibliometria-ia-humanas` | capítulo 2, "A emergência do campo brasileiro de estudos em inteligência artificial..." | classificador em cinco subcampos, análises CAPES, SciELO e OpenAlex, figuras e tabelas | dump CAPES `BR-CAPES-BTD-2021A2024-2025-12-01`; API ArticleMeta (SciELO); OpenAlex | 13 |
 | `bibliometria-publicacoes-c4ai` | capítulo 3, "As publicações acadêmicas do C4AI" | base curada de 407 publicações, matriz grupo por ano, composição de equipe, co-word | site do C4AI; relatórios anuais do C4AI à FAPESP (2021 a 2025) | 4 |
 | `spira-espectrogramas` | capítulo 4, "Espectrogramas mel: a imagem da voz" | script de formas de onda, espectrogramas mel e diagrama CNN | dataset público SPIRA (CC BY-SA 4.0) | 6 |
-| `tecno-etnografia-tese-site` | capítulos 1 a 5 (inscrições do próprio texto) e site público | pipeline de rede textual (co-ocorrência, NPMI, Louvain, PageRank), trajetórias lexicais, site | arquivos `.tex` da tese | 43 (inclui cópias espelhadas) |
+| `tecno-etnografia-tese-site` | capítulos 1 a 5 (inscrições do próprio texto) e site público | pipeline da análise de rede textual (co-ocorrência, NPMI, Louvain, PageRank), trajetórias lexicais, site | arquivos `.tex` da tese | 43 (inclui cópias espelhadas) |
 
 ## Pendências identificadas antes do depósito
 
@@ -27,5 +27,5 @@ Dados e textos de origem (CAPES, SciELO, OpenAlex, relatórios do C4AI, obras de
 6. **Assinaturas do Anexo 1.** Resolvido em 10/10/2026, por decisão da autora: as assinaturas ficam fora do repositório e são feitas diretamente no PDF. `ex_ane1.tex` reserva o espaço de cada assinatura, e o arquivo `figuras/assinatura_suely.jpg.jpg`, incluído por uma sincronização do Overleaf em 08/10/2026, foi retirado (continua no histórico do git). O logo `figuras/logo_anexo1.jpg` está no repositório.
 7. **Licenças.** Apenas `bibliometria-ia-humanas` tem arquivo `LICENSE`. `analise-figuracoes-latour` declara MIT em `pyproject.toml`, sem o arquivo. Os demais não declaram licença de código, dados ou figuras. A tese traz modelos `cc-by.tex` e `cc-by-sa.tex`; a escolha para dados e figuras é decisão sua e da plataforma de depósito.
 8. **Resíduos neste repositório.** Resolvido em 10/10/2026: `bibantigo.tex`, `src/exem.c`, `tabelas/exem.csv` e `ex_ape4.tex` (vazio) foram retirados. A pasta `biblatex_style_samples/` fica, porque `pacotes.tex` carrega `sample.bib` e `sample-abel.bib` dela.
-9. **Duplicação de `infranodus/`.** Este repositório e `tecno-etnografia-tese-site` contêm cada um uma cópia do pipeline e dos resultados da rede textual, com arquivos de resultado diferentes (regeração em datas distintas). Eleger um dos dois como fonte e referenciar o outro.
+9. **Duplicação da análise de rede textual.** Resolvido em 10/10/2026: o *pipeline* e os resultados ficam só em `tecno-etnografia-tese-site/rede_textual/` (antes `infranodus/`), onde o fluxo automático os regenera a partir dos `.tex`; a cópia deste repositório foi retirada e as legendas e notas da tese passaram a apontar para lá.
 10. **Tamanho.** Este repositório tem cerca de 435 MB e o site cerca de 275 MB, o que pesa no arquivo ZIP do depósito.

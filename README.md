@@ -12,7 +12,6 @@ Este repositório contém o texto-fonte em LaTeX da minha tese de doutorado (Pro
 | `ex_ape1.tex` a `ex_ape3.tex` | apêndices, hoje fora da compilação (comentados em `tese.tex`) |
 | `tese.bib` | bibliografia (biblatex) |
 | `figuras/` | figuras por capítulo |
-| `infranodus/` | análise de rede textual dos capítulos e da tese inteira |
 | `docs/MAPA_DE_DADOS.md` | mapa dos repositórios de dados e de onde cada resultado entra na tese |
 | `atualizar_figuras_tese.sh` | copia para `figuras/` as figuras regeneradas nos repositórios de análise |
 
@@ -26,7 +25,7 @@ Os dados, *scripts* e figuras das análises estão em repositórios próprios, c
 | [`bibliometria-ia-humanas`](https://github.com/julianehelanski/bibliometria-ia-humanas) | 2 | mapeamento da IA nas ciências humanas brasileiras (CAPES, SciELO, OpenAlex) |
 | [`bibliometria-publicacoes-c4ai`](https://github.com/julianehelanski/bibliometria-publicacoes-c4ai) | 3 | base curada e análise das publicações do C4AI |
 | [`spira-espectrogramas`](https://github.com/julianehelanski/spira-espectrogramas) | 4 | formas de onda e espectrogramas mel do *dataset* do SPIRA |
-| [`tecno-etnografia-tese-site`](https://github.com/julianehelanski/tecno-etnografia-tese-site) | 1 a 5 | rede textual da tese e site que a acompanha |
+| [`tecno-etnografia-tese-site`](https://github.com/julianehelanski/tecno-etnografia-tese-site) | 1 a 5 | análise de rede textual da tese e site que a acompanha |
 
 O material de campo (entrevistas e diário de campo) não está em nenhum dos repositórios.
 
@@ -36,7 +35,7 @@ Compilar `tese.tex` com `pdflatex` e `biber` (biblatex), no Overleaf conectado a
 
 ## Uso de inteligência artificial generativa
 
-O texto da tese é meu. Fiz a tese com três ferramentas de IA generativa, todas descritas no Anexo 1. Com o Claude, interface de conversação, fiz interlocução argumentativa, revisão gramatical e edição. Com o Claude Code, interface de linha de comando que dá ao modelo de linguagem acesso aos arquivos do projeto, escrevi os *scripts* das análises, a rede textual dos capítulos (`infranodus/`), os diagramas e a padronização das figuras, e organizei os repositórios para o depósito. Com o NotebookLM organizei conjuntos temáticos de obras da bibliografia. A recursividade desse trabalho com o modelo de linguagem é parte do argumento da tese e está descrita nos capítulos 1 e 4.
+O texto da tese é meu. Fiz a tese com três ferramentas de IA generativa, todas descritas no Anexo 1. Com o Claude, interface de conversação, fiz interlocução argumentativa, revisão gramatical e edição. Com o Claude Code, interface de linha de comando que dá ao modelo de linguagem acesso aos arquivos do projeto, escrevi os *scripts* das análises, a análise de rede textual dos capítulos (no repositório `tecno-etnografia-tese-site`), os diagramas e a padronização das figuras, e organizei os repositórios para o depósito. Com o NotebookLM organizei conjuntos temáticos de obras da bibliografia. A recursividade desse trabalho com o modelo de linguagem é parte do argumento da tese e está descrita nos capítulos 1 e 4.
 
 **Modelos registrados no histórico de versões:** Claude Opus 4.7, Claude Opus 4.8, Claude Opus 5.5 e Claude Sonnet 5.5 (junho a outubro de 2026), além das versões registradas nos demais repositórios (Claude Sonnet 4.6 e Claude Sonnet 5).
 
