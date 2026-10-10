@@ -9,7 +9,7 @@ Este repositório contém o texto-fonte em LaTeX da minha tese de doutorado (Pro
 | `tese.tex`, `configuracao.tex`, `pacotes.tex` | documento principal e configuração |
 | `ex_cap.tex`, `ex_cap0.tex` a `ex_cap5.tex` | prefácio, apresentação, capítulos 1 a 4 e considerações finais |
 | `ex_ane1.tex` | anexo 1, declaração de uso de IA generativa |
-| `ex_ape1.tex` a `ex_ape3.tex` | apêndices, hoje fora da compilação (comentados em `tese.tex`) |
+| `ex_ape1.tex` a `ex_ape3.tex` | arquivos de apêndice vazios ou comentados, fora da compilação |
 | `tese.bib` | bibliografia (biblatex) |
 | `figuras/` | figuras por capítulo |
 | `docs/MAPA_DE_DADOS.md` | mapa dos repositórios de dados e de onde cada resultado entra na tese |
