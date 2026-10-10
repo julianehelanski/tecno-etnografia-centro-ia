@@ -1,4 +1,4 @@
-# {tecnografia} de um centro de inteligência artificial: seguindo cientistas e engenheiros, universidade afora
+# Tecnografias de um centro de inteligência artificial: seguindo cientistas e engenheiros universidade afora
 
 Este repositório contém o texto-fonte em LaTeX da minha tese de doutorado (Programa de Pós-Graduação em Ciências Sociais, IFCH, Unicamp, 2026), uma tecnografia do Centro de Inteligência Artificial da USP (C4AI, parceria USP/FAPESP/IBM) e do sistema Spira, de detecção de insuficiência respiratória pela voz. É o repositório central do conjunto: reúne o texto, a bibliografia e as figuras de todos os capítulos, e o mapa que liga cada figura e tabela ao repositório de dados de onde vem.
 
@@ -44,4 +44,6 @@ Os *commits* com autor `Claude`, ou com a linha `Co-Authored-By: Claude …`, fo
 
 ## Citação
 
-> HELANSKI, Juliane. *{tecnografia} de um centro de inteligência artificial*: seguindo cientistas e engenheiros, universidade afora. 2026. Tese (Doutorado em Ciências Sociais) – Instituto de Filosofia e Ciências Humanas, Universidade Estadual de Campinas, Campinas, 2026.
+> CARDOSO, Juliane Cristina Helanski. *Tecnografias de um centro de inteligência artificial*: seguindo cientistas e engenheiros universidade afora. Orientadora: Maria Suely Kofes. 2026. Tese (Doutorado em Ciências Sociais) – Instituto de Filosofia e Ciências Humanas, Universidade Estadual de Campinas, Campinas, 2026.
+
+ORCID da autora: https://orcid.org/0000-0001-8649-8986.

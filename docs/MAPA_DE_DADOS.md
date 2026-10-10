@@ -1,6 +1,6 @@
 # Mapa de dados da tese
 
-Índice dos repositórios que compõem os materiais da tese *{tecnografia} de um centro de inteligência artificial: seguindo cientistas e engenheiros, universidade afora* (Helanski, Unicamp, 2026), com o que cada um contém, onde seus resultados entram na tese e como foram produzidos. Documento escrito em 09/10/2026 a partir da leitura dos arquivos `ex_cap*.tex` (commit 3f0f671, 08/10/2026) e dos cinco repositórios satélites. Cada repositório satélite tem o detalhamento figura a figura em `docs/USO_NA_TESE.md` e `docs/uso_na_tese.csv`.
+Índice dos repositórios que compõem os materiais da tese *Tecnografias de um centro de inteligência artificial: seguindo cientistas e engenheiros universidade afora* (Cardoso, Unicamp, 2026), com o que cada um contém, onde seus resultados entram na tese e como foram produzidos. Documento escrito em 09/10/2026 a partir da leitura dos arquivos `ex_cap*.tex` (commit 3f0f671, 08/10/2026) e dos cinco repositórios satélites. Cada repositório satélite tem o detalhamento figura a figura em `docs/USO_NA_TESE.md` e `docs/uso_na_tese.csv`.
 
 ## Fluxo geral
 
