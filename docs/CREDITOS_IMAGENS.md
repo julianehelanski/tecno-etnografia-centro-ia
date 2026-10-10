@@ -25,7 +25,7 @@ Inventário das imagens de autoria de terceiros reproduzidas na tese, com a font
 
 ## Imagens de terceiros no repositório sem uso na tese
 
-Estas imagens não são incluídas por nenhum arquivo `ex_*.tex` e podem ficar fora do depósito:
+Estas imagens não são incluídas por nenhum arquivo `.tex` da versão atual, nem com outro nome (conferido por SHA-256), e podem ficar fora do depósito. As de `artigos-marcelo/` e `artigos-spira/` entraram no capítulo 4 até a reescrita de 21/06/2026 (17 delas tinham figura própria), quando o capítulo passou a descrever esses artigos sem reproduzir suas figuras; as fotografias de `covid/` (`DSCN*`, `Dscn*`, `Vero_*`) não aparecem em nenhuma versão do texto no histórico do repositório.
 
 - `figuras/cap.4/covid/`: oito arquivos (`DSCN7305.jpeg`, `Dscn7344.jpg`, `Dscn7345.jpg`, `Dscn7348.jpg`, `Dscn7350.jpg` e três `Vero_*_corona_filopodio_*.jpg`);
 - `figuras/cap.4/artigos-spira/`: 43 capturas de tela de artigos do projeto SPIRA e `cnn14_arquitetura.png`;
