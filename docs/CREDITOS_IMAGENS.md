@@ -23,10 +23,6 @@ Inventário das imagens de autoria de terceiros reproduzidas na tese, com a font
 | `novel-coronavirus-sars-cov-2_49641177821_o.jpg` | idem | NIAID/NIH | idem |
 | `novel-coronavirus-sars-cov-2_49645120251_o.jpg` | idem | NIAID/NIH | idem |
 
-## Imagens de terceiros no repositório sem uso na tese
+## Imagens de terceiros retiradas do repositório
 
-Estas imagens não são incluídas por nenhum arquivo `.tex` da versão atual, nem com outro nome (conferido por SHA-256), e podem ficar fora do depósito. As de `artigos-marcelo/` e `artigos-spira/` entraram no capítulo 4 até a reescrita de 21/06/2026 (17 delas tinham figura própria), quando o capítulo passou a descrever esses artigos sem reproduzir suas figuras; as fotografias de `covid/` (`DSCN*`, `Dscn*`, `Vero_*`) não aparecem em nenhuma versão do texto no histórico do repositório.
-
-- `figuras/cap.4/covid/`: oito arquivos (`DSCN7305.jpeg`, `Dscn7344.jpg`, `Dscn7345.jpg`, `Dscn7348.jpg`, `Dscn7350.jpg` e três `Vero_*_corona_filopodio_*.jpg`);
-- `figuras/cap.4/artigos-spira/`: 43 capturas de tela de artigos do projeto SPIRA e `cnn14_arquitetura.png`;
-- `figuras/artigos-marcelo/`: 35 figuras e tabelas recortadas de artigos de Marcelo Finger e colaboradores.
+Em 10/10/2026 retirei do repositório as 87 imagens de terceiros que nenhum arquivo `.tex` da versão atual inclui (conferido pelo nome e, para cópias com outro nome, por SHA-256): oito fotografias de `figuras/cap.4/covid/` (`DSCN7305.jpeg`, `Dscn7344.jpg`, `Dscn7345.jpg`, `Dscn7348.jpg`, `Dscn7350.jpg` e três `Vero_*_corona_filopodio_*.jpg`), as 44 de `figuras/cap.4/artigos-spira/` (43 capturas de tela de artigos do projeto SPIRA e `cnn14_arquitetura.png`) e as 35 de `figuras/artigos-marcelo/` (figuras e tabelas recortadas de artigos de Marcelo Finger e colaboradores). As de `artigos-spira/` e `artigos-marcelo/` entraram no capítulo 4 até a reescrita de 21/06/2026; as fotografias de `covid/` não aparecem em nenhuma versão do texto. Todas continuam no histórico do git.
